@@ -3,7 +3,7 @@
 
 	"name": "棒読みランチャー",
 	"description": "__MSG_app_description__",
-	"version": "1.1.0",
+	"version": "1.1.1",
 
 	"default_locale": "en",
 	"homepage_url": "https://github.com/GenbuHase/BouyomiLauncher",
@@ -15,10 +15,20 @@
 				"*://studio.youtube.com/channel/*/livestreaming/dashboard?*"
 			],
 
-			"js": ["modules/YouTube.js"],
+			"js": ["scripts/services/YouTube.js"],
 
 			"all_frames": true,
 			"run_at": "document_idle"
 		}
-	]
+	],
+
+	"browser_action": {
+		"default_title": "__MSG_app_name__",
+		"default_popup": "views/ConfigView/index.html"
+	},
+
+	"options_ui": {
+		"page": "views/ConfigView/index.html",
+		"open_in_tab": false
+	}
 }

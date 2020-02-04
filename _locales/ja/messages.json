@@ -1,3 +1,6 @@
 {
-	"app_description": { "message": "棒読みちゃんに自動読み上げさせるChrome拡張機能" }
+	"app_name": { "message": "棒読みランチャー" },
+	"app_description": { "message": "棒読みちゃんに自動読み上げさせるChrome拡張機能" },
+
+	"view_ConfigView_title": { "message": "設定" }
 }
