@@ -1,14 +1,18 @@
 {
 	"manifest_version": 2,
+
 	"name": "棒読みランチャー",
-	"description": "棒読みちゃんに自動読み上げさせるChrome拡張機能",
-	"version": "1.0.1",
+	"description": "__MSG_app_description__",
+	"version": "1.1.0",
+
+	"default_locale": "en",
+	"homepage_url": "https://github.com/GenbuHase/BouyomiLauncher",
 	
 	"content_scripts": [
 		{
 			"matches": [
-				"*://www.youtube.com/live_chat*",
-				"*://studio.youtube.com/channel/*/livestreaming/dashboard*"
+				"*://www.youtube.com/live_chat?*",
+				"*://studio.youtube.com/channel/*/livestreaming/dashboard?*"
 			],
 
 			"js": ["modules/YouTube.js"],
