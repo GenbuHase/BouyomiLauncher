@@ -12,6 +12,8 @@ const BOUYOMI_SOCKET_URL = "ws://localhost:50002";
  */
 const sendMessageToSocket = (message, config = {}) => {
 	const bouyomi = new WebSocket(BOUYOMI_SOCKET_URL);
+	bouyomi.addEventListener("error", () => { throw new Error("Couldn't connect to Bouyomi-chan's socket server") });
+
 	bouyomi.addEventListener("open", () => {
 		bouyomi.send([
 			config.speed !== undefined ? config.speed : -1,
@@ -45,6 +47,8 @@ const sanitizeChatMessage = messageElement => {
 
 
 (() => {
+	console.info("[Bouyomi Launcher] Launched");
+	
 	const observer = new MutationObserver(mutations => {
 		for (const mutation of mutations) {
 			if (mutation.type !== "childList") return;
