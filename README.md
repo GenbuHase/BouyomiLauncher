@@ -6,6 +6,10 @@
 This extension enables your [Bouyomi-chan] to read aloud automatically on some services.
 
 
+## Languages
+* [Japanese (日本語)](/README_ja.md)
+
+
 ## Installation
 Make sure to install [a WebSocket Plugin for Bouyomi-chan](https://github.com/chocoa/BouyomiChan-WebSocket-Plugin) before using Bouyomi-Launcher.
 

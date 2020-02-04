@@ -6,6 +6,10 @@
 いくつかのサービスにおいて、[棒読みちゃん]が自動的に読み上げるようになります。
 
 
+## Languages
+* [英語 (English)](/README.md)
+
+
 ## 導入方法
 ご利用の前に、必ず[WebSocketプラグイン](https://github.com/chocoa/BouyomiChan-WebSocket-Plugin)を導入してください。
 
