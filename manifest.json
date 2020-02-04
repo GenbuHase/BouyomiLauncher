@@ -1,0 +1,15 @@
+{
+	"manifest_version": 2,
+	"name": "棒読みランチャー",
+	"description": "棒読みちゃんに自動読み上げさせるChrome拡張機能",
+	"version": "1.0.0",
+	
+	"content_scripts": [
+		{
+			"matches": ["*://studio.youtube.com/channel/*/livestreaming/*"],
+			"js": ["modules/YouTube-Live.js"],
+
+			"run_at": "document_idle"
+		}
+	]
+}
