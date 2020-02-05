@@ -2,5 +2,18 @@
 	"app_name": { "message": "Bouyomi Launcher" },
 	"app_description": { "message": "An extension of Google Chrome, which enables your Bouyomi-chan to read aloud automatically on some services" },
 
-	"view_Settings_title": { "message": "Settings" }
+
+	"common_ok": { "message": "OK" }, "common_cancel": { "message": "Cancel" },
+	"common_grant": { "message": "Grant" }, "common_deny": { "message": "Deny" },
+	"common_yes": { "message": "Yes" }, "common_no": { "message": "No" },
+	"common_on": { "message": "On" }, "common_off": { "message": "Off" },
+
+
+	"service_YouTube": { "message": "YouTube" },
+	"service_YouTubeLive": { "message": "YouTube Live" },
+
+
+	"view_Settings_title": { "message": "Settings" },
+	"view_Settings_form_services": { "message": "Permitted Services" },
+	"view_Settings_form_services__description": { "message": "Select services to enable this extension's feature." }
 }

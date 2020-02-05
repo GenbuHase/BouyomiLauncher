@@ -11,6 +11,7 @@
 		<Script Src = "../libs/jquery-3.4.1.min.js"></Script>
 		<Script Src = "../libs/Fomantic-UI/dist/semantic.min.js"></Script>
 		
+		<Link Rel = "StyleSheet" Href = "./index.css" />
 		<Script Type = "module" Src = "./index.js" Defer></Script>
 	</Head>
 
@@ -28,7 +29,26 @@
 		</Header>
 
 		<Main Class = "ui container segment basic">
-			<H1 Class = "ui header">{{ __MSG_view_Settings_title__ }}</H1>
+			<H2 Class = "ui header">{{ __MSG_view_Settings_title__ }}</H2>
+
+			<Section Class = "ui form segment">
+				<H4 Class = "ui dividing header">
+					{{ __MSG_view_Settings_form_services__ }}
+					<Div Class = "sub header">{{ __MSG_view_Settings_form_services__description__ }}</Div>
+				</H4>
+
+				<Div Class = "grouped fields">
+					<Div ID = "form_services--YouTube" Class = "field ui checkbox toggle">
+						<Label>{{ __MSG_service_YouTube__ }}</Label>
+						<Input Type = "checkbox" />
+					</Div>
+
+					<Div ID = "form_services--YouTubeLive" Class = "field ui checkbox toggle">
+						<Label>{{ __MSG_service_YouTubeLive__ }}</Label>
+						<Input Type = "checkbox" />
+					</Div>
+				</Div>
+			</Section>
 		</Main>
 	</Body>
 </HTML>

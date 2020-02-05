@@ -2,5 +2,18 @@
 	"app_name": { "message": "棒読みランチャー" },
 	"app_description": { "message": "棒読みちゃんに自動読み上げさせるChrome拡張機能" },
 
-	"view_Settings_title": { "message": "設定" }
+
+	"common_ok": { "message": "OK" }, "common_cancel": { "message": "キャンセル" },
+	"common_grant": { "message": "許可" }, "common_deny": { "message": "拒否" },
+	"common_yes": { "message": "はい" }, "common_no": { "message": "いいえ" },
+	"common_on": { "message": "オン" }, "common_off": { "message": "オフ" },
+
+
+	"service_YouTube": { "message": "YouTube" },
+	"service_YouTubeLive": { "message": "YouTube Live" },
+
+
+	"view_Settings_title": { "message": "設定" },
+	"view_Settings_form_services": { "message": "利用するサービス" },
+	"view_Settings_form_services__description": { "message": "自動読み上げを有効にするサービスを選択してください。" }
 }

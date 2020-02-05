@@ -1,4 +1,3 @@
-
 (() => {
 	/**
 	 * @param {string} str
@@ -29,11 +28,14 @@
 
 	if (!chrome.i18n) {
 		chrome.i18n = {};
+		chrome.i18n.language = new URLSearchParams(location.search).get("lang") || navigator.language;
 
-		fetch(`/_locales/${navigator.language}/messages.json`)
-			.catch(err => fetch("/_locales/en/messages.json"))
-			.then(resp => resp.json())
-			.then(messages => chrome.i18n.messages = messages);
+		fetch("/_locales/en/messages.json")
+			.then(resp => resp.json()).then(messages => chrome.i18n.defaultMessages = messages)
+
+			.then(() => fetch(`/_locales/${chrome.i18n.language}/messages.json`))
+				.then(resp => resp.json()).then(messages => chrome.i18n.messages = Object.assign({}, chrome.i18n.defaultMessages, messages))
+				.catch(err => chrome.i18n.messages = chrome.i18n.defaultMessages);
 	}
 
 	if (!chrome.i18n.getMessage) {
@@ -41,6 +43,6 @@
 		 * @param {string} varName
 		 * @return {string}
 		 */
-		chrome.i18n.getMessage = varName => chrome.i18n.messages[varName] ? chrome.i18n.messages[varName].message : null;
+		chrome.i18n.getMessage = varName => (chrome.i18n.messages[varName] && chrome.i18n.messages[varName].message) || null;
 	}
 })();
