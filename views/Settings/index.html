@@ -1,0 +1,34 @@
+<!DocType HTML>
+
+<HTML>
+	<Head>
+		<Meta Charset = "UTF-8" />
+		<Title>{{ __MSG_view_Settings_title__ }}｜{{ __MSG_app_name__ }}</Title>
+		
+		<Script Type = "module" Src = "../libs/Init.js"></Script>
+
+		<Link Rel = "StyleSheet" Href = "../libs/Fomantic-UI/dist/semantic.min.css" />
+		<Script Src = "../libs/jquery-3.4.1.min.js"></Script>
+		<Script Src = "../libs/Fomantic-UI/dist/semantic.min.js"></Script>
+		
+		<Script Type = "module" Src = "./index.js" Defer></Script>
+	</Head>
+
+	<Body>
+		<Header Class = "ui menu labeled icon borderless steps unstackable tiny">
+			<Div Class = "item header step">
+				<I Class = "icon circular inverted teal">棒</I>
+				{{ __MSG_app_name__ }}
+			</Div>
+
+			<Div Class = "item step">
+				<I Class = "icon wrench circular"></I>
+				{{ __MSG_view_Settings_title__ }}
+			</Div>
+		</Header>
+
+		<Main Class = "ui container segment basic">
+			<H1 Class = "ui header">{{ __MSG_view_Settings_title__ }}</H1>
+		</Main>
+	</Body>
+</HTML>

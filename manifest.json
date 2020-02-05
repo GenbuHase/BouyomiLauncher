@@ -3,7 +3,7 @@
 
 	"name": "棒読みランチャー",
 	"description": "__MSG_app_description__",
-	"version": "1.1.1",
+	"version": "1.1.2",
 
 	"default_locale": "en",
 	"homepage_url": "https://github.com/GenbuHase/BouyomiLauncher",
@@ -24,11 +24,11 @@
 
 	"browser_action": {
 		"default_title": "__MSG_app_name__",
-		"default_popup": "views/ConfigView/index.html"
+		"default_popup": "views/Settings/index.html"
 	},
 
 	"options_ui": {
-		"page": "views/ConfigView/index.html",
+		"page": "views/Settings/index.html",
 		"open_in_tab": false
 	}
 }
