@@ -1,5 +1,6 @@
 {
 	"app_name": { "message": "Bouyomi Launcher" },
+	"app_shortName": { "message": "BL" },
 	"app_description": { "message": "An extension of Google Chrome, which enables your Bouyomi-chan to read aloud automatically on some services" },
 
 

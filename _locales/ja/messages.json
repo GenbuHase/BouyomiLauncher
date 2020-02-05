@@ -1,5 +1,6 @@
 {
 	"app_name": { "message": "棒読みランチャー" },
+	"app_shortName": { "message": "棒" },
 	"app_description": { "message": "棒読みちゃんに自動読み上げさせるChrome拡張機能" },
 
 

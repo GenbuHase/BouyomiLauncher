@@ -18,7 +18,7 @@
 	<Body>
 		<Header Class = "ui menu labeled icon borderless steps unstackable tiny">
 			<Div Class = "item header step">
-				<I Class = "icon circular inverted teal">棒</I>
+				<I Class = "icon circular inverted teal">{{ __MSG_app_shortName__ }}</I>
 				{{ __MSG_app_name__ }}
 			</Div>
 
@@ -37,7 +37,7 @@
 					<Div Class = "sub header">{{ __MSG_view_Settings_form_services__description__ }}</Div>
 				</H4>
 
-				<Div Class = "grouped fields">
+				<Div ID = "form_services" Class = "grouped fields">
 					<Div ID = "form_services--YouTube" Class = "field ui checkbox toggle">
 						<Label>{{ __MSG_service_YouTube__ }}</Label>
 						<Input Type = "checkbox" />

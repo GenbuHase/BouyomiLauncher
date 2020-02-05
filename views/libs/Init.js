@@ -1,4 +1,15 @@
 (() => {
+	/** @return {String} A type of the instance */
+	Object.prototype.getClassName = function () {
+		return Object.prototype.toString.call(this).slice(8, -1);
+	}
+
+	Object.defineProperties(Object.prototype, {
+		getClassName: { configurable: true, writable: true, enumerable: false }
+	});
+})();
+
+(() => {
 	/**
 	 * @param {string} str
 	 * @param {RegExp} matcher
