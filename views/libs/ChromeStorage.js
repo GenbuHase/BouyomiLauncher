@@ -46,12 +46,12 @@ export default class ChromeStorage {
 		});
 	}
 
-	/** @param {string | string[] | Object<string, any>} keyOrListOrObj */
-	async remove (keyOrListOrObj) {
-		if (!["String", "Array", "Object"].includes(keyOrListOrObj.getClassName())) throw new TypeError('"keyOrListOrObj" must be String or String[] or Object');
+	/** @param {string | string[]} keyOrList */
+	async remove (keyOrList) {
+		if (!["String", "Array"].includes(keyOrList.getClassName())) throw new TypeError('"keyOrList" must be String or String[]');
 
 		return new Promise(resolve => {
-			this.storage.remove(keyOrListOrObj, () => resolve());
+			this.storage.remove(keyOrList, () => resolve());
 		});
 	}
 
