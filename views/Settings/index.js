@@ -3,37 +3,42 @@ import ChromeStorage from "../libs/ChromeStorage.js";
 
 
 
+const SELECTORS = {
+	Form: "#form.ui.form",
+	Form_Services: "#form_services",
+	Form_Services_Service: ".ui.toggle[Data-Service]",
+	Form_Services_Service_Toggle: "Input[Type='checkbox']"
+};
+
+
 const storage = new ChromeStorage("sync");
 
-new Promise(resolve => {
-	let i18nLooper = setInterval(() => {
-		if (I18n.isLoaded) {
-			clearInterval(i18nLooper);
-			I18n.apply();
-
-			resolve();
-		}
-	}, 80);
-}).then(() => {
+I18n.autoApply().then(() => {
 	return storage.get({
 		YouTube: false,
 		YouTubeLive: false
 	}).then(store => {
-		const toggles = document.querySelectorAll("*[ID*='form_services--']");
+		const toggles = document.querySelectorAll(`${SELECTORS.Form} ${SELECTORS.Form_Services} > ${SELECTORS.Form_Services_Service}`);
 		for (const toggle of toggles) {
-			const serviceName = toggle.id.split("--")[1];
-			toggle.querySelector("input").checked = store[serviceName];
+			const { service } = toggle.dataset;
+			toggle.querySelector(SELECTORS.Form_Services_Service_Toggle).checked = store[service];
 		}
 	});
 }).then(() => {
 	$(".ui.checkbox")
 		.checkbox()
-		.each(function (index) {
+		.each(function () {
 			this.addEventListener("change", function () {
-				const serviceName = this.id.split("--")[1];
+				const { service } = this.dataset;
 
-				storage.set(serviceName, this.querySelector("input").checked).then(store => {
-					console.info(`[BouyomiLauncher] ${serviceName} is ${store[serviceName] ? "enabled" : "disabled"}.`);
+				storage.set(service, this.querySelector(SELECTORS.Form_Services_Service_Toggle).checked).then(store => {
+					$("body").toast({
+						message: I18n.get(`view_Settings_toast__${store[service] ? "enabled" : "disabled"}`, I18n.get(`service_${service}`)),
+
+						class: "success",
+						className: { toast: "ui icon message" },
+						showIcon: `toggle ${store[service] ? "on" : "off"}`
+					});
 				});
 			});
 		});

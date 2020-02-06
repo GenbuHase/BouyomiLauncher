@@ -2,7 +2,7 @@
 	/** @return {String} A type of the instance */
 	Object.prototype.getClassName = function () {
 		return Object.prototype.toString.call(this).slice(8, -1);
-	}
+	};
 
 	Object.defineProperties(Object.prototype, {
 		getClassName: { configurable: true, writable: true, enumerable: false }
@@ -27,7 +27,7 @@
 		}
 
 		return result;
-	}
+	};
 
 	Object.defineProperties(String.prototype, {
 		matchGlobally: { configurable: true, writable: true, enumerable: false }
@@ -35,6 +35,7 @@
 })();
 
 (() => {
+	// eslint-disable-next-line no-global-assign
 	chrome = chrome || {};
 
 	if (!chrome.i18n) {
@@ -46,7 +47,7 @@
 
 			.then(() => fetch(`/_locales/${chrome.i18n.language}/messages.json`))
 				.then(resp => resp.json()).then(messages => chrome.i18n.messages = Object.assign({}, chrome.i18n.defaultMessages, messages))
-				.catch(err => chrome.i18n.messages = chrome.i18n.defaultMessages);
+				.catch(() => chrome.i18n.messages = chrome.i18n.defaultMessages);
 	}
 
 	if (!chrome.i18n.getMessage) {

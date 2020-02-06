@@ -1,0 +1,29 @@
+{
+	"extends": "eslint:recommended",
+	"plugins": [],
+	
+	"env": {
+		"es6": true,
+		"browser": true,
+		"jquery": true,
+		"webextensions": true
+	},
+	
+	"parserOptions": {
+		"ecmaVersion": 9,
+		"sourceType": "module"
+	},
+	
+	"rules": {
+		"semi": ["error", "always", { "omitLastInOneLineBlock": true }],
+		"semi-style": ["error", "last"],
+		"no-unused-vars": "warn",
+		"no-duplicate-imports": "error",
+		"object-shorthand": ["error", "always", { "avoidExplicitReturnArrows": true }],
+		"prefer-rest-params": "warn",
+		"prefer-spread": "warn",
+		"prefer-template": "warn",
+		"prefer-numeric-literals": "warn",
+		"no-irregular-whitespace": ["warn", { "skipTemplates": true }]
+	}
+}

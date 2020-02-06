@@ -27,7 +27,7 @@ const sendMessageToSocket = (message, config = {}) => {
 
 
 
-const Queries = {
+const SELECTORS = {
 	ChatList: ".yt-live-chat-item-list-renderer#items",
 
 	Chat_ViewerMessage: "yt-live-chat-viewer-engagement-message-renderer",
@@ -54,9 +54,9 @@ const sanitizeChatMessage = messageElement => {
 			if (mutation.type !== "childList") return;
 
 			for (const chat of mutation.addedNodes) {
-				if (chat.tagName.toLowerCase() === Queries.Chat_TextMessage) {
-					const author = chat.querySelector(Queries.Chat_TextMessage_AuthorName).textContent;
-					const message = sanitizeChatMessage(chat.querySelector(Queries.Chat_TextMessage_Message));
+				if (chat.tagName.toLowerCase() === SELECTORS.Chat_TextMessage) {
+					const author = chat.querySelector(SELECTORS.Chat_TextMessage_AuthorName).textContent;
+					const message = sanitizeChatMessage(chat.querySelector(SELECTORS.Chat_TextMessage_Message));
 
 					sendMessageToSocket(`${author} さん　　${message}`);
 				}
@@ -65,7 +65,7 @@ const sanitizeChatMessage = messageElement => {
 	});
 	
 	const looper = setInterval(() => {
-		const chatList = document.querySelector(Queries.ChatList);
+		const chatList = document.querySelector(SELECTORS.ChatList);
 
 		if (chatList) {
 			clearInterval(looper);

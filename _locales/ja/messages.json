@@ -16,5 +16,18 @@
 
 	"view_Settings_title": { "message": "設定" },
 	"view_Settings_form_services": { "message": "利用するサービス" },
-	"view_Settings_form_services__description": { "message": "自動読み上げを有効にするサービスを選択してください。" }
+	"view_Settings_form_services__description": { "message": "自動読み上げを有効にするサービスを選択してください。" },
+
+	"view_Settings_toast__enabled": {
+		"message": "$service$ を有効にしました",
+		"placeholders": {
+			"service": { "content": "$1" }
+		}
+	},
+	"view_Settings_toast__disabled": {
+		"message": "$service$ を無効にしました",
+		"placeholders": {
+			"service": { "content": "$1" }
+		}
+	}
 }

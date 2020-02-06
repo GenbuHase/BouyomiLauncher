@@ -31,19 +31,19 @@
 		<Main Class = "ui container segment basic">
 			<H2 Class = "ui header">{{ __MSG_view_Settings_title__ }}</H2>
 
-			<Section Class = "ui form segment">
+			<Section ID = "form" Class = "ui form segment">
 				<H4 Class = "ui dividing header">
 					{{ __MSG_view_Settings_form_services__ }}
 					<Div Class = "sub header">{{ __MSG_view_Settings_form_services__description__ }}</Div>
 				</H4>
 
 				<Div ID = "form_services" Class = "grouped fields">
-					<Div ID = "form_services--YouTube" Class = "field ui checkbox toggle">
+					<Div Class = "field ui checkbox toggle" Data-Service = "YouTube">
 						<Label>{{ __MSG_service_YouTube__ }}</Label>
 						<Input Type = "checkbox" />
 					</Div>
 
-					<Div ID = "form_services--YouTubeLive" Class = "field ui checkbox toggle">
+					<Div Class = "field ui checkbox toggle" Data-Service = "YouTubeLive">
 						<Label>{{ __MSG_service_YouTubeLive__ }}</Label>
 						<Input Type = "checkbox" />
 					</Div>

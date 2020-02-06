@@ -16,5 +16,18 @@
 
 	"view_Settings_title": { "message": "Settings" },
 	"view_Settings_form_services": { "message": "Permitted Services" },
-	"view_Settings_form_services__description": { "message": "Select services to enable this extension's feature." }
+	"view_Settings_form_services__description": { "message": "Select services to enable features." },
+	
+	"view_Settings_toast__enabled": {
+		"message": "$service$ is enabled.",
+		"placeholders": {
+			"service": { "content": "$1" }
+		}
+	},
+	"view_Settings_toast__disabled": {
+		"message": "$service$ is disabled.",
+		"placeholders": {
+			"service": { "content": "$1" }
+		}
+	}
 }
