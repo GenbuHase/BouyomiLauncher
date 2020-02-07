@@ -3,23 +3,40 @@
 
 	"name": "__MSG_app_name__",
 	"description": "__MSG_app_description__",
-	"version": "1.1.7",
+	"version": "1.1.8",
 
 	"default_locale": "en",
 	"homepage_url": "https://github.com/GenbuHase/BouyomiLauncher",
 
 	"permissions": [
-		"storage"
+		"tabs",
+		"webNavigation",
+		"storage",
+
+		"*://www.youtube.com/live_chat*",
+		"*://studio.youtube.com/channel/*/livestreaming/dashboard?*"
 	],
+
+	"background": {
+		"scripts": ["scripts/back/index.js"],
+		"persistent": false
+	},
 	
 	"content_scripts": [
 		{
+			"js": ["scripts/content/index.js"],
 			"matches": [
-				"*://www.youtube.com/live_chat?*",
+				"*://www.youtube.com/live_chat*",
+				"*://studio.youtube.com/channel/*/livestreaming/dashboard?*"
+			]
+		},
+
+		{
+			"js": ["scripts/content/services/YouTube.js"],
+			"matches": [
+				"*://www.youtube.com/live_chat*",
 				"*://studio.youtube.com/channel/*/livestreaming/dashboard?*"
 			],
-
-			"js": ["scripts/services/YouTube.js"],
 
 			"all_frames": true,
 			"run_at": "document_idle"
