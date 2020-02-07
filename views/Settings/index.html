@@ -5,7 +5,8 @@
 		<Meta Charset = "UTF-8" />
 		<Title>{{ __MSG_view_Settings_title__ }}｜{{ __MSG_app_name__ }}</Title>
 		
-		<Script Type = "module" Src = "../libs/Init.js"></Script>
+		<Script Type = "module" Src = "../../libs/Init.js"></Script>
+		<Script Src = "../../libs/ChromeStorage.js"></Script>
 
 		<Link Rel = "StyleSheet" Href = "../libs/Fomantic-UI/dist/semantic.min.css" />
 		<Script Src = "../libs/jquery-3.4.1.min.js"></Script>
@@ -38,13 +39,13 @@
 				</H4>
 
 				<Div ID = "form_services" Class = "grouped fields">
-					<Div Class = "field ui checkbox toggle" Data-Service = "YouTube">
-						<Label>{{ __MSG_service_YouTube__ }}</Label>
+					<Div Class = "field ui checkbox toggle" Data-Service = "YouTubeLiveOnViewer">
+						<Label>{{ __MSG_service_YouTubeLiveOnViewer__ }}</Label>
 						<Input Type = "checkbox" />
 					</Div>
 
-					<Div Class = "field ui checkbox toggle" Data-Service = "YouTubeLive">
-						<Label>{{ __MSG_service_YouTubeLive__ }}</Label>
+					<Div Class = "field ui checkbox toggle" Data-Service = "YouTubeLiveOnBroadcaster">
+						<Label>{{ __MSG_service_YouTubeLiveOnBroadcaster__ }}</Label>
 						<Input Type = "checkbox" />
 					</Div>
 				</Div>

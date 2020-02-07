@@ -10,8 +10,8 @@
 	"common_on": { "message": "オン" }, "common_off": { "message": "オフ" },
 
 
-	"service_YouTube": { "message": "YouTube" },
-	"service_YouTubeLive": { "message": "YouTube Live" },
+	"service_YouTubeLiveOnViewer": { "message": "YouTube Live (閲覧側)" },
+	"service_YouTubeLiveOnBroadcaster": { "message": "YouTube Live (配信側)" },
 
 
 	"view_Settings_title": { "message": "設定" },

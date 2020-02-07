@@ -1,11 +1,11 @@
-export default class ChromeStorage {
+class ChromeStorage {
 	/** @param {"sync" | "local"} storageType */
 	constructor (storageType) {
 		this.storageType = storageType;
 	}
 
 	get storage () { return chrome.storage[this.storageType] }
-
+	
 	get storageType () { return this._storageType }
 
 	/** @param {"sync" | "local"} storageType */

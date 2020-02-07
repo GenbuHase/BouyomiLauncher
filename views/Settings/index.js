@@ -1,5 +1,5 @@
+/* global ChromeStorage */
 import I18n from "../libs/I18n.js";
-import ChromeStorage from "../libs/ChromeStorage.js";
 
 
 
@@ -15,8 +15,8 @@ const storage = new ChromeStorage("sync");
 
 I18n.autoApply().then(() => {
 	return storage.get({
-		YouTube: false,
-		YouTubeLive: false
+		YouTubeLiveOnViewer: false,
+		YouTubeLiveOnBroadcaster: false
 	}).then(store => {
 		const toggles = document.querySelectorAll(`${SELECTORS.Form} ${SELECTORS.Form_Services} > ${SELECTORS.Form_Services_Service}`);
 		for (const toggle of toggles) {

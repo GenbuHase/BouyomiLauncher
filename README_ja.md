@@ -22,9 +22,9 @@
 
 
 ## 実装済みのサービス
-* 	### YouTube (https://www.youtube.com/live_chat)
-* 	### YouTube Live (https://studio.youtube.com/channel/{:id}/livestreaming/dashboard)
-	※ 現行のUIで有効
+* ### YouTube Live (閲覧側) (https://www.youtube.com/live_chat)
+* ### YouTube Live (配信側) (https://studio.youtube.com/channel/{:id}/livestreaming/dashboard)
+  ※ 現行のUIで有効
 
 
 ## ライセンス

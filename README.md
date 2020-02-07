@@ -22,9 +22,9 @@ Make sure to install [a WebSocket Plugin for Bouyomi-chan](https://github.com/ch
 
 
 ## Implemented Services
-* 	### YouTube (https://www.youtube.com/live_chat)
-* 	### YouTube Live (https://studio.youtube.com/channel/{:id}/livestreaming/dashboard)
-	※ Available on latest-UI
+* ### YouTube Live on Viewer (https://www.youtube.com/live_chat)
+* ### YouTube Live on Broadcaster (https://studio.youtube.com/channel/{:id}/livestreaming/dashboard)
+  ※ Available on latest-UI
 
 
 ## LICENSE
