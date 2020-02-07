@@ -3,7 +3,7 @@
 
 	"name": "__MSG_app_name__",
 	"description": "__MSG_app_description__",
-	"version": "1.2.0",
+	"version": "1.2.1",
 
 	"default_locale": "en",
 	"homepage_url": "https://github.com/GenbuHase/BouyomiLauncher",
@@ -27,8 +27,7 @@
 			"js": [
 				"scripts/libs/Init.js",
 				"scripts/libs/ChromeStorage.js",
-
-				"scripts/content/index.js"
+				"scripts/libs/Bouyomi.js"
 			],
 
 			"matches": [
