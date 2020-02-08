@@ -4,15 +4,18 @@
 	<Head>
 		<Meta Charset = "UTF-8" />
 		<Title>{{ __MSG_view_Settings_title__ }}｜{{ __MSG_app_name__ }}</Title>
-		
-		<Script Type = "module" Src = "../../scripts/libs/Init.js"></Script>
-		<Script Src = "../../scripts/libs/ChromeStorage.js"></Script>
 
 		<Link Rel = "StyleSheet" Href = "../libs/Fomantic-UI/dist/semantic.min.css" />
+		<Link Rel = "StyleSheet" Href = "./index.css" />
+
 		<Script Src = "../libs/jquery-3.4.1.min.js"></Script>
 		<Script Src = "../libs/Fomantic-UI/dist/semantic.min.js"></Script>
 		
-		<Link Rel = "StyleSheet" Href = "./index.css" />
+
+		<Script Type = "module" Src = "../../scripts/libs/Initialize.js"></Script>
+		<Script Src = "../../scripts/libs/ChromeStorage.js"></Script>
+		<Script Src = "../../scripts/libs/variables.js"></Script>
+
 		<Script Type = "module" Src = "./index.js" Defer></Script>
 	</Head>
 
@@ -39,15 +42,6 @@
 				</H4>
 
 				<Div ID = "form_services" Class = "grouped fields">
-					<Div Class = "field ui checkbox toggle" Data-Service = "YouTubeLiveOnViewer">
-						<Label>{{ __MSG_service_YouTubeLiveOnViewer__ }}</Label>
-						<Input Type = "checkbox" />
-					</Div>
-
-					<Div Class = "field ui checkbox toggle" Data-Service = "YouTubeLiveOnBroadcaster">
-						<Label>{{ __MSG_service_YouTubeLiveOnBroadcaster__ }}</Label>
-						<Input Type = "checkbox" />
-					</Div>
 				</Div>
 			</Section>
 		</Main>
