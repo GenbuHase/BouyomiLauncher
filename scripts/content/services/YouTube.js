@@ -1,5 +1,6 @@
 /* global Bouyomi */
 /* global ChromeStorage */
+/* global STORAGE_KEYS */
 class YouTube {
 	static get SELECTORS () {
 		return {
@@ -38,7 +39,7 @@ chrome.runtime.onMessage.addListener(({ id }, sender, resolve) => {
 					const author = chat.querySelector(YouTube.SELECTORS.Chat_Message_AuthorName).textContent;
 					const message = YouTube.sanitizeChatMessage(chat.querySelector(YouTube.SELECTORS.Chat_Message_Message));
 
-					storage.get(id).then(store => store[id] && Bouyomi.speak(`${author} さん　　${message}`));
+					storage.get(`${STORAGE_KEYS.SERVICES}_${id}`).then(value => value && Bouyomi.speak(`${author} さん　　${message}`));
 				}
 			}
 		}

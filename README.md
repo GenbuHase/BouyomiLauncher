@@ -11,7 +11,7 @@ This extension enables your [Bouyomi-chan] to read aloud automatically on some s
 
 
 ## Installation
-Make sure to install [a WebSocket Plugin for Bouyomi-chan](https://github.com/chocoa/BouyomiChan-WebSocket-Plugin) before using Bouyomi-Launcher.
+Make sure to install [a WebSocket Plugin for Bouyomi-chan](https://github.com/xztaityozx/BouyomiChan-WebSocket-Plugin) before using Bouyomi-Launcher.
 
 1. 	Download one from this repository and unpack.
 

@@ -14,3 +14,8 @@ const SERVICES = {
 		expression: /https?:\/\/studio\.youtube\.com\/channel\/([^/]+)\/livestreaming\/dashboard(\?.*)?/
 	}
 };
+
+const STORAGE_KEYS = {
+	BOUYOMI_TYPE: "bouyomiType",
+	SERVICES: "services"
+};

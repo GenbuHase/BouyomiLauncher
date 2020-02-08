@@ -75,10 +75,10 @@
 				let result = (() => {
 					let result = {};
 
-					if (typeof keyOrListOrObj === "string") return JSON.parse(sessionStorage.getItem(keyOrListOrObj)).value;
+					if (typeof keyOrListOrObj === "string") return (JSON.parse(sessionStorage.getItem(keyOrListOrObj)) || {}).value;
 					if (Array.isArray(keyOrListOrObj)) {
 						for (const key of keyOrListOrObj) {
-							result[key] = JSON.parse(sessionStorage.getItem(key)).value;
+							result[key] = (JSON.parse(sessionStorage.getItem(key)) || {}).value;
 						}
 
 						return result;

@@ -10,21 +10,27 @@
 	"common_on": { "message": "On" }, "common_off": { "message": "Off" },
 
 
-	"service_001_YouTubeLiveOnViewer": { "message": "YouTube Live On Viewer" },
-	"service_002_YouTubeLiveOnBroadcaster": { "message": "YouTube Live On Broadcaster" },
+	"services_001_YouTubeLiveOnViewer": { "message": "YouTube Live On Viewer" },
+	"services_002_YouTubeLiveOnBroadcaster": { "message": "YouTube Live On Broadcaster" },
 
 
 	"view_Settings_title": { "message": "Settings" },
+
+	"view_Settings_form_bouyomiType": { "message": "Message-Teller" },
+	"view_Settings_form_bouyomiType__description": { "message": "Choose built-in or external program." },
+	"view_Settings_form_bouyomiType__bouyomi": { "message": "Bouyomi-chan" },
+	"view_Settings_form_bouyomiType__native": { "message": "Built-in teller (SpeechSynthesis API)" },
+
 	"view_Settings_form_services": { "message": "Permitted Services" },
 	"view_Settings_form_services__description": { "message": "Select services to enable features." },
 	
-	"view_Settings_toast__enabled": {
+	"view_Settings_form_services_toast__enabled": {
 		"message": "$service$ is enabled.",
 		"placeholders": {
 			"service": { "content": "$1" }
 		}
 	},
-	"view_Settings_toast__disabled": {
+	"view_Settings_form_services_toast__disabled": {
 		"message": "$service$ is disabled.",
 		"placeholders": {
 			"service": { "content": "$1" }

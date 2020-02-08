@@ -19,13 +19,16 @@ class ChromeStorage {
 
 	/**
 	 * @param {string | string[] | Object<string, any>} keyOrListOrObj
-	 * @return {Promise<Object<string, any>>}
+	 * @return {Promise<string | Object<string, any>>}
 	 */
 	async get (keyOrListOrObj) {
 		if (!["String", "Array", "Object"].includes(keyOrListOrObj.getClassName())) throw new TypeError('"keyOrListOrObj" must be String or String[] or Object');
 
 		return new Promise(resolve => {
-			this.storage.get(keyOrListOrObj, items => resolve(items));
+			this.storage.get(keyOrListOrObj, items => {
+				if (typeof keyOrListOrObj === "string") resolve(items[keyOrListOrObj]);
+				resolve(items);
+			});
 		});
 	}
 	

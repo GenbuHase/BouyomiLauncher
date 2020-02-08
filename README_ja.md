@@ -11,7 +11,7 @@
 
 
 ## 導入方法
-ご利用の前に、必ず[WebSocketプラグイン](https://github.com/chocoa/BouyomiChan-WebSocket-Plugin)を導入してください。
+ご利用の前に、必ず[WebSocketプラグイン](https://github.com/xztaityozx/BouyomiChan-WebSocket-Plugin)を導入してください。
 
 1. 	このレポジトリから棒読みランチャーをダウンロードし、解凍します。
 
