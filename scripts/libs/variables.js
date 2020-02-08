@@ -6,11 +6,11 @@
 
 /** @type {Object<string, Service>} */
 const SERVICES = {
-	YouTubeLiveOnViewer: {
+	"001_YouTubeLiveOnViewer": {
 		expression: /https?:\/\/www\.youtube\.com\/live_chat(?:_replay)?(\?.*)?/
 	},
 
-	YouTubeLiveOnBroadcaster: {
+	"002_YouTubeLiveOnBroadcaster": {
 		expression: /https?:\/\/studio\.youtube\.com\/channel\/([^/]+)\/livestreaming\/dashboard(\?.*)?/
 	}
 };
