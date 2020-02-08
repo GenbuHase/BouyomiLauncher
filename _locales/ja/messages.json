@@ -19,7 +19,7 @@
 	"view_Settings_form_bouyomiType": { "message": "読み上げに利用するツール" },
 	"view_Settings_form_bouyomiType__description": { "message": "内部または外部ツールより選択してください。" },
 	"view_Settings_form_bouyomiType__bouyomi": { "message": "棒読みちゃん" },
-	"view_Settings_form_bouyomiType__native": { "message": "内蔵のプログラム (SpeechSynthesis API)" },
+	"view_Settings_form_bouyomiType__native": { "message": "内蔵API (SpeechSynthesis API)" },
 
 	"view_Settings_form_services": { "message": "利用するサービス" },
 	"view_Settings_form_services__description": { "message": "自動読み上げを有効にするサービスを選択してください。" },

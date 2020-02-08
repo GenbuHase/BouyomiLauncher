@@ -1,4 +1,4 @@
-/* global ChromeStorage */
+/* global storage */
 /* global SERVICES */
 /* global STORAGE_KEYS */
 import I18n from "../libs/I18n.js";
@@ -14,8 +14,6 @@ const SELECTORS = {
 	Form_Services_Service_Toggle: "Input[Type='checkbox']"
 };
 
-
-const storage = new ChromeStorage("sync");
 
 I18n.autoApply()
 	.then(async () => {
@@ -33,13 +31,15 @@ I18n.autoApply()
 			.dropdown("set selected", value);
 	})
 	.then(async () => {
-		/** @param {string} service */
-		const getServiceKey = service => `${STORAGE_KEYS.SERVICES}_${service}`;
-
-
+		/*
+		 * <Div Class = "field ui checkbox toggle" Data-Storage-Key = "${STORAGE_KEYS.SERVICES}" Data-Service = "${service}">
+		 *     <Label>{{ __MSG_services_${service}__ }}</Label>
+		 *     <Input Type = "checkbox" />
+		 * </Div>
+		 */
 		const formServices = document.querySelector(`${SELECTORS.Form} ${SELECTORS.Form_Services}`);
 		for (const service of Object.keys(SERVICES)) {
-			const key = getServiceKey(service);
+			const key = STORAGE_KEYS.getServiceKey(service);
 			const value = await storage.get(key) || false;
 
 

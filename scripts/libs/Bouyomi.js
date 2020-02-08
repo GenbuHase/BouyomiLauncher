@@ -1,11 +1,30 @@
+/* global storage */
+/* global STORAGE_KEYS */
 class Bouyomi {
+	static get TYPE () {
+		return {
+			Bouyomi: "BOUYOMI",
+			Native: "NATIVE"
+		};
+	}
+
+
 	/**
 	 * @param {string} message
 	 */
-	static speak (message) {
-		// if (isExternal)
+	static async speak (message) {
+		const client = await this._getClient();
+		client.speak(message);
+	}
 
-		this.Client.speak(message);
+
+	static async _getClient () {
+		switch (await storage.get(STORAGE_KEYS.BOUYOMI_TYPE)) {
+			case this.TYPE.Bouyomi:
+				return this.Client;
+			case this.TYPE.Native:
+				return this.NativeClient;
+		}
 	}
 }
 

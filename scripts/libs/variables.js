@@ -17,5 +17,9 @@ const SERVICES = {
 
 const STORAGE_KEYS = {
 	BOUYOMI_TYPE: "bouyomiType",
-	SERVICES: "services"
+	SERVICES: "services",
+
+
+	/** @param {string} service */
+	getServiceKey (service) { return `${this.SERVICES}_${service}` }
 };

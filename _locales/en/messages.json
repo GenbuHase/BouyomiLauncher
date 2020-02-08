@@ -19,7 +19,7 @@
 	"view_Settings_form_bouyomiType": { "message": "Message-Teller" },
 	"view_Settings_form_bouyomiType__description": { "message": "Choose built-in or external program." },
 	"view_Settings_form_bouyomiType__bouyomi": { "message": "Bouyomi-chan" },
-	"view_Settings_form_bouyomiType__native": { "message": "Built-in teller (SpeechSynthesis API)" },
+	"view_Settings_form_bouyomiType__native": { "message": "Built-in API (SpeechSynthesis API)" },
 
 	"view_Settings_form_services": { "message": "Permitted Services" },
 	"view_Settings_form_services__description": { "message": "Select services to enable features." },

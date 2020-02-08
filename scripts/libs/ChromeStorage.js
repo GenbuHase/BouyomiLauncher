@@ -64,3 +64,7 @@ class ChromeStorage {
 		});
 	}
 }
+
+
+
+const storage = new ChromeStorage("sync");

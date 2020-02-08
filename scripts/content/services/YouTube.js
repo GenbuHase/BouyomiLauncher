@@ -1,5 +1,5 @@
 /* global Bouyomi */
-/* global ChromeStorage */
+/* global storage */
 /* global STORAGE_KEYS */
 class YouTube {
 	static get SELECTORS () {
@@ -27,9 +27,7 @@ class YouTube {
 
 
 
-const storage = new ChromeStorage("sync");
-
-chrome.runtime.onMessage.addListener(({ id }, sender, resolve) => {
+chrome.runtime.onMessage.addListener(({ serviceId }, sender, resolve) => {
 	const observer = new MutationObserver(mutations => {
 		for (const mutation of mutations) {
 			if (mutation.type !== "childList") return;
@@ -39,7 +37,9 @@ chrome.runtime.onMessage.addListener(({ id }, sender, resolve) => {
 					const author = chat.querySelector(YouTube.SELECTORS.Chat_Message_AuthorName).textContent;
 					const message = YouTube.sanitizeChatMessage(chat.querySelector(YouTube.SELECTORS.Chat_Message_Message));
 
-					storage.get(`${STORAGE_KEYS.SERVICES}_${id}`).then(value => value && Bouyomi.speak(`${author} さん　　${message}`));
+					storage.get(STORAGE_KEYS.getServiceKey(serviceId)).then(value => {
+						if (value) Bouyomi.speak(`${author} さん　　${message}`);
+					});
 				}
 			}
 		}
@@ -52,7 +52,7 @@ chrome.runtime.onMessage.addListener(({ id }, sender, resolve) => {
 			clearInterval(looper);
 			observer.observe(chatList, { childList: true });
 
-			resolve({ id });
+			resolve({ serviceId });
 		}
 	}, 1000);
 
