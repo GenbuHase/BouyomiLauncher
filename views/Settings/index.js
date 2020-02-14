@@ -50,16 +50,9 @@ I18n.autoApply()
 				elem.dataset.service = service;
 
 				elem.addEventListener("change", function () {
-					storage.set(key, fieldElem_input.checked).then(store => {
-						$("body").toast({
-							position: "bottom right",
-							message: I18n.get(`view_Settings_form_services_toast__${store[key] ? "enabled" : "disabled"}`, I18n.get(key)),
-
-							class: "success",
-							className: { toast: "ui icon message" },
-							showIcon: `toggle ${store[key] ? "on" : "off"}`
-						});
-					});
+					storage.set(key, fieldElem_input.checked).then(store =>
+						console.info(I18n.get(`view_Settings_form_services_toast__${store[key] ? "enabled" : "disabled"}`, I18n.get(key)))
+					);
 				});
 
 				return elem;
