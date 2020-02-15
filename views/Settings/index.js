@@ -1,6 +1,6 @@
+/* global SERVICES, STORAGE_KEYS */
 /* global storage */
-/* global SERVICES */
-/* global STORAGE_KEYS */
+/* global Bouyomi */
 import I18n from "../libs/I18n.js";
 
 
@@ -8,7 +8,11 @@ import I18n from "../libs/I18n.js";
 const SELECTORS = {
 	Form: "#form.ui.form",
 	Form_BouyomiType: "#form_bouyomiType",
-	Form_BouyomiType_List: "Select.ui.dropdown",
+	Form_BouyomiConfig: "#form_bouyomiConfig",
+	Form_BouyomiConfig_Speed: "#form_bouyomiConfig_speed",
+	Form_BouyomiConfig_Pitch: "#form_bouyomiConfig_pitch",
+	Form_BouyomiConfig_Volume: "#form_bouyomiConfig_volume",
+	Form_BouyomiConfig_Type: "#form_bouyomiConfig_type",
 	Form_Services: "#form_services",
 	Form_Services_Service: ".ui.toggle[Data-Service]",
 	Form_Services_Service_Toggle: "Input[Type='checkbox']"
@@ -20,15 +24,27 @@ I18n.autoApply()
 		const { BOUYOMI_TYPE } = STORAGE_KEYS;
 		const value = await storage.get(BOUYOMI_TYPE) || "BOUYOMI";
 
-		$(`${SELECTORS.Form_BouyomiType} ${SELECTORS.Form_BouyomiType_List}`)
+		$(SELECTORS.Form_BouyomiType)
 			.each(function () {
 				this.dataset.storageKey = BOUYOMI_TYPE;
 				
-				this.addEventListener("change", function () {
-					storage.set(this.dataset.storageKey, this.value);
+				this.addEventListener("change", () => {
+					const clientType = this.value;
+					storage.set(this.dataset.storageKey, clientType);
+
+					$(`${SELECTORS.Form_BouyomiConfig} *[data-config-label-id]`)
+						.each(function () {
+							const { configLabelId } = this.dataset;
+							this.querySelector(".sub.header").textContent = I18n.get(`view_Settings_form_bouyomiConfig_${configLabelId}__description__${clientType.toLowerCase()}`);
+						});
 				});
 			})
 			.dropdown("set selected", value);
+
+		$(SELECTORS.Form_BouyomiType)
+			.each(function () {
+				this.dispatchEvent(new Event("change"));
+			});
 	})
 	.then(async () => {
 		/*
@@ -72,6 +88,7 @@ I18n.autoApply()
 	})
 
 	.then(() => {
-		$(".ui.dropdown").dropdown();
+		$(".ui.dropdown").dropdown({ preserveHTML: false });
 		$(".ui.checkbox").checkbox();
+		$(".ui.accordion").accordion();
 	});

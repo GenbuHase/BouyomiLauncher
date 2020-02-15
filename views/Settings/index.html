@@ -13,8 +13,9 @@
 		
 
 		<Script Type = "module" Src = "../../scripts/libs/Initialize.js"></Script>
-		<Script Src = "../../scripts/libs/ChromeStorage.js"></Script>
 		<Script Src = "../../scripts/libs/variables.js"></Script>
+		<Script Src = "../../scripts/libs/ChromeStorage.js"></Script>
+		<Script Src = "../../scripts/libs/Bouyomi.js"></Script>
 
 		<Script Type = "module" Src = "./index.js" Defer></Script>
 	</Head>
@@ -36,25 +37,59 @@
 			<H2 Class = "ui header">{{ __MSG_view_Settings_title__ }}</H2>
 
 			<Section ID = "form" Class = "ui form segment">
-				<H4 Class = "ui dividing header">
+				<H4 Class = "ui header">
 					{{ __MSG_view_Settings_form_bouyomiType__ }}
-					<Div Class = "sub header">{{ __MSG_view_Settings_form_bouyomiType__description__ }}</Div>
+					<Span Class = "sub header">{{ __MSG_view_Settings_form_bouyomiType__description__ }}</Span>
 				</H4>
 
-				<Div ID = "form_bouyomiType" Class = "grouped fields">
-					<Select Class = "ui dropdown fluid">
+				<Div Class = "fields grouped">
+					<Select ID = "form_bouyomiType" Class = "ui dropdown fluid">
 						<Option Value = "BOUYOMI">{{ __MSG_view_Settings_form_bouyomiType__bouyomi__ }}</Option>
 						<Option Value = "NATIVE">{{ __MSG_view_Settings_form_bouyomiType__native__ }}</Option>
 					</Select>
+
+					<Div Class = "field ui accordion">
+						<Div Class = "title active">
+							<I Class = "icon dropdown"></I>
+							{{ __MSG_view_Settings_form_bouyomiConfig__ }}
+						</Div>
+	
+						<Div ID = "form_bouyomiConfig" Class = "content fields grouped active">
+							<H5 Class = "ui sub header" data-config-label-id = "speed">
+								{{ __MSG_view_Settings_form_bouyomiConfig_speed__ }}
+								<Span Class = "sub header">{{ __MSG_view_Settings_form_bouyomiConfig_speed__range__bouyomi__ }}</Span>
+							</H5>
+
+							<Div Class = "ui input">
+								<Input Type = "number" Min = "-1" />
+							</Div>
+
+
+							<H5 Class = "ui sub header" data-config-label-id = "type">
+								{{ __MSG_view_Settings_form_bouyomiConfig_type__ }}
+								<Span Class = "sub header">{{ __MSG_view_Settings_form_bouyomiConfig_type__range__bouyomi__ }}</Span>
+							</H5>
+
+							<Select ID = "form_bouyomiConfig_type" Class = "ui dropdown fluid">
+								<!-- <Option Value = "${voice.name}">${voice.name}</Option> -->
+							</Select>
+						</Div>
+					</Div>
 				</Div>
 
 
-				<H4 Class = "ui dividing header">
+				<H4 Class = "ui header">
 					{{ __MSG_view_Settings_form_services__ }}
-					<Div Class = "sub header">{{ __MSG_view_Settings_form_services__description__ }}</Div>
+					<Span Class = "sub header">{{ __MSG_view_Settings_form_services__description__ }}</Span>
 				</H4>
 
-				<Div ID = "form_services" Class = "grouped fields">
+				<Div ID = "form_services" Class = "fields grouped">
+					<!--
+						<Div Class = "field ui checkbox toggle" Data-Storage-Key = "${STORAGE_KEYS.SERVICES}" Data-Service = "${service}">
+							<Label>{{ __MSG_services_${service}__ }}</Label>
+							<Input Type = "checkbox" />
+						</Div>
+					-->
 				</Div>
 			</Section>
 		</Main>

@@ -1,6 +1,6 @@
-/* global Bouyomi */
-/* global storage */
 /* global STORAGE_KEYS */
+/* global storage */
+/* global Bouyomi */
 class YouTube {
 	static get SELECTORS () {
 		return {

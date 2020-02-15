@@ -1,5 +1,5 @@
-/* global storage */
 /* global STORAGE_KEYS */
+/* global storage */
 class Bouyomi {
 	static get TYPE () {
 		return {
@@ -11,10 +11,11 @@ class Bouyomi {
 
 	/**
 	 * @param {string} message
+	 * @param {BouyomiConfig | NativeBouyomiConfig} config
 	 */
-	static async speak (message) {
+	static async speak (message, config) {
 		const client = await this._getClient();
-		client.speak(message);
+		client.speak(message, config);
 	}
 
 
@@ -32,10 +33,10 @@ class Bouyomi {
 /**
  * @typedef {Object} BouyomiConfig
  * @prop {0x0001 | 0x0010 | 0x0020 | 0x0030} [command = 0x0001] 0x0001=読み上げ / 0x0010=ポーズ / 0x0020=再開 / 0x0030=スキップ
- * @prop {number} [speed = -1]
- * @prop {number} [pitch = -1]
- * @prop {number} [volume = -1]
- * @prop {number} [type = 0]
+ * @prop {number} [speed = -1] Between 50 and 200 (Default: -1)
+ * @prop {number} [pitch = -1] Between 50 and 200 (Default: -1)
+ * @prop {number} [volume = -1] Between 0 and 100 (Default: -1)
+ * @prop {number} [type = 0] Check Bouyomi-chan's settings
  */
 Bouyomi.Client = class Client {
 	static get DELIMITER () { return "<bouyomi>" }
@@ -83,9 +84,9 @@ Bouyomi.Client = class Client {
 
 /**
  * @typedef {Object} NativeBouyomiConfig
- * @prop {number} [speed = 1] Between 0.1 and 10
- * @prop {number} [pitch = 1] Between 0 and 2
- * @prop {number} [volume = 1] Between 0 and 1
+ * @prop {number} [speed = 1] Between 0.1 and 10 (Default: 1)
+ * @prop {number} [pitch = 1] Between 0 and 2 (Default: 1)
+ * @prop {number} [volume = 1] Between 0 and 1 (Default: 1)
  * @prop {SpeechSynthesisVoice} [voice]
  */
 Bouyomi.NativeClient = class NativeClient {
@@ -101,7 +102,7 @@ Bouyomi.NativeClient = class NativeClient {
 			speed: 1,
 			pitch: 1,
 			volume: 1,
-			voice: null
+			voice: this.VOICES.find(voice => voice.name === "Google 日本語")
 		}, config);
 
 

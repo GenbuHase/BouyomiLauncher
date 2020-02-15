@@ -16,10 +16,20 @@
 
 	"view_Settings_title": { "message": "Settings" },
 
-	"view_Settings_form_bouyomiType": { "message": "Message-Teller" },
-	"view_Settings_form_bouyomiType__description": { "message": "Choose built-in or external program." },
+	"view_Settings_form_bouyomiType": { "message": "Message Reader" },
+	"view_Settings_form_bouyomiType__description": { "message": "Choose built-in or external tools." },
 	"view_Settings_form_bouyomiType__bouyomi": { "message": "Bouyomi-chan" },
 	"view_Settings_form_bouyomiType__native": { "message": "Built-in API (SpeechSynthesis API)" },
+
+	"view_Settings_form_bouyomiConfig": { "message": "Advanced..." },
+	"view_Settings_form_bouyomiConfig_speed": { "message": "Speed" },
+	"view_Settings_form_bouyomiConfig_speed__description__bouyomi": { "message": "" },
+	"view_Settings_form_bouyomiConfig_speed__description__native": { "message": "" },
+	"view_Settings_form_bouyomiConfig_pitch": { "message": "Pitch" },
+	"view_Settings_form_bouyomiConfig_volume": { "message": "Volume" },
+	"view_Settings_form_bouyomiConfig_type": { "message": "Voice Type" },
+	"view_Settings_form_bouyomiConfig_type__description__bouyomi": { "message": "Please check Bouyomi-chan's settings. (Default: -1)" },
+	"view_Settings_form_bouyomiConfig_type__description__native": { "message": "Choose one from a below field." },
 
 	"view_Settings_form_services": { "message": "Permitted Services" },
 	"view_Settings_form_services__description": { "message": "Select services to enable features." },
