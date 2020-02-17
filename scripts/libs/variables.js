@@ -17,7 +17,7 @@ const SERVICES = {
 
 const STORAGE_KEYS = {
 	BOUYOMI_TYPE: "bouyomiType",
-	BOUYOMI_CONFIG: "bouyomiConfig",
+	NATIVE_BOUYOMI_CONFIG: "nativeBouyomiConfig",
 	SERVICES: "services",
 
 

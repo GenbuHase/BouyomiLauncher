@@ -1,6 +1,7 @@
 /* global SERVICES, STORAGE_KEYS */
 /* global storage */
 /* global Bouyomi */
+
 import I18n from "../libs/I18n.js";
 
 
@@ -21,8 +22,8 @@ const SELECTORS = {
 };
 
 const animateByBouyomiType = bouyomiType => {
-	$(SELECTORS.Form_BouyomiConfig_Indicator).transition(bouyomiType === Bouyomi.TYPE.Bouyomi ? "show" : "hide", { displayType: "flex" });
-	$(SELECTORS.Form_NativeBouyomiConfig).transition(bouyomiType === Bouyomi.TYPE.Bouyomi ? "hide" : "show");
+	$(SELECTORS.Form_BouyomiConfig_Indicator).transition(bouyomiType === Bouyomi.ClientType.Bouyomi ? "show" : "hide", { displayType: "flex" });
+	$(SELECTORS.Form_NativeBouyomiConfig).transition(bouyomiType === Bouyomi.ClientType.Bouyomi ? "hide" : "show");
 };
 
 

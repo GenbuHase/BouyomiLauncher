@@ -1,5 +1,7 @@
 /* global SERVICES */
 
+
+
 chrome.webNavigation.onCompleted.addListener(details => {
 	for (const service of Object.entries(SERVICES)) {
 		if (service[1].expression.exec(details.url)) {
