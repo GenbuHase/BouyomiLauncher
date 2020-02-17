@@ -9,13 +9,20 @@ const SELECTORS = {
 	Form: "#form.ui.form",
 	Form_BouyomiType: "#form_bouyomiType",
 	Form_BouyomiConfig: "#form_bouyomiConfig",
-	Form_BouyomiConfig_Speed: "#form_bouyomiConfig_speed",
-	Form_BouyomiConfig_Pitch: "#form_bouyomiConfig_pitch",
-	Form_BouyomiConfig_Volume: "#form_bouyomiConfig_volume",
-	Form_BouyomiConfig_Type: "#form_bouyomiConfig_type",
+	Form_BouyomiConfig_Indicator: "#form_bouyomiConfig_indicator",
+	Form_NativeBouyomiConfig: "#form_nativeBouyomiConfig",
+	Form_NativeBouyomiConfig_Speed: "#form_nativeBouyomiConfig_speed",
+	Form_NativeBouyomiConfig_Pitch: "#form_nativeBouyomiConfig_pitch",
+	Form_NativeBouyomiConfig_Volume: "#form_nativeBouyomiConfig_volume",
+	Form_NativeBouyomiConfig_Type: "#form_nativeBouyomiConfig_type",
 	Form_Services: "#form_services",
 	Form_Services_Service: ".ui.toggle[Data-Service]",
 	Form_Services_Service_Toggle: "Input[Type='checkbox']"
+};
+
+const animateByBouyomiType = bouyomiType => {
+	$(SELECTORS.Form_BouyomiConfig_Indicator).transition(bouyomiType === Bouyomi.TYPE.Bouyomi ? "show" : "hide", { displayType: "flex" });
+	$(SELECTORS.Form_NativeBouyomiConfig).transition(bouyomiType === Bouyomi.TYPE.Bouyomi ? "hide" : "show");
 };
 
 
@@ -29,22 +36,26 @@ I18n.autoApply()
 				this.dataset.storageKey = BOUYOMI_TYPE;
 				
 				this.addEventListener("change", () => {
-					const clientType = this.value;
-					storage.set(this.dataset.storageKey, clientType);
+					const bouyomiType = this.value;
+					storage.set(this.dataset.storageKey, bouyomiType);
 
-					$(`${SELECTORS.Form_BouyomiConfig} *[data-config-label-id]`)
-						.each(function () {
-							const { configLabelId } = this.dataset;
-							this.querySelector(".sub.header").textContent = I18n.get(`view_Settings_form_bouyomiConfig_${configLabelId}__description__${clientType.toLowerCase()}`);
-						});
+					animateByBouyomiType(bouyomiType);
 				});
 			})
 			.dropdown("set selected", value);
 
-		$(SELECTORS.Form_BouyomiType)
-			.each(function () {
-				this.dispatchEvent(new Event("change"));
-			});
+		animateByBouyomiType(value);
+	})
+	.then(async () => {
+		await Bouyomi.NativeClient.waitUntilLoaded();
+
+		const VOICES = speechSynthesis.getVoices();
+
+		for (const voice of VOICES) {
+			document.querySelector(SELECTORS.Form_NativeBouyomiConfig_Type).appendChild(
+				new Option(voice.name, voice.name)
+			);
+		}
 	})
 	.then(async () => {
 		/*
@@ -65,10 +76,8 @@ I18n.autoApply()
 				elem.dataset.storageKey = STORAGE_KEYS.SERVICES,
 				elem.dataset.service = service;
 
-				elem.addEventListener("change", function () {
-					storage.set(key, fieldElem_input.checked).then(store =>
-						console.info(I18n.get(`view_Settings_form_services_toast__${store[key] ? "enabled" : "disabled"}`, I18n.get(key)))
-					);
+				elem.addEventListener("change", () => {
+					storage.set(key, fieldElem_input.checked);
 				});
 
 				return elem;

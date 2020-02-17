@@ -1,12 +1,20 @@
 {
 	"private": true,
-	"name": "bouyomi-launcher",
-	"version": "1.0.0",
+	"name": "genbuhase_bouyomi-launcher",
+	"version": "1.2.9",
 	"main": "index.js",
 	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1"
+		"start": "serve -l 8001",
+		"dev": "run-p start watch",
+
+		"watch": "run-p watch:scss",
+		"watch:scss": "node-sass -w ./views/Settings/scss/index.scss ./views/Settings/index.css --output-style compact --indent-type tab --indent-width 1"
 	},
 	"dependencies": {
-		"fomantic-ui": "^2.8.3"
+		"fomantic-ui": "^2.8.3",
+		"npm-run-all": "^4.1.5"
+	},
+	"devDependencies": {
+		"node-sass": "^4.13.1"
 	}
 }

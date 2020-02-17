@@ -42,39 +42,73 @@
 					<Span Class = "sub header">{{ __MSG_view_Settings_form_bouyomiType__description__ }}</Span>
 				</H4>
 
-				<Div Class = "fields grouped">
-					<Select ID = "form_bouyomiType" Class = "ui dropdown fluid">
-						<Option Value = "BOUYOMI">{{ __MSG_view_Settings_form_bouyomiType__bouyomi__ }}</Option>
-						<Option Value = "NATIVE">{{ __MSG_view_Settings_form_bouyomiType__native__ }}</Option>
-					</Select>
+				<Select ID = "form_bouyomiType" Class = "field ui dropdown fluid">
+					<Option Value = "BOUYOMI">{{ __MSG_view_Settings_form_bouyomiType__bouyomi__ }}</Option>
+					<Option Value = "NATIVE">{{ __MSG_view_Settings_form_bouyomiType__native__ }}</Option>
+				</Select>
 
-					<Div Class = "field ui accordion">
-						<Div Class = "title active">
-							<I Class = "icon dropdown"></I>
-							{{ __MSG_view_Settings_form_bouyomiConfig__ }}
+
+				<Section>
+					<Div ID = "form_bouyomiConfig">
+						<Div ID = "form_bouyomiConfig_indicator" Class = "ui icon message info">
+							<I Class = "icon info circle"></I>
+
+							<Div Class = "content">
+								<Div Class = "header">Note</Div>
+								<P>{{ __MSG_view_Settings_form_bouyomiConfig__indicator__ }}</P>
+							</Div>
 						</Div>
-	
-						<Div ID = "form_bouyomiConfig" Class = "content fields grouped active">
-							<H5 Class = "ui sub header" data-config-label-id = "speed">
-								{{ __MSG_view_Settings_form_bouyomiConfig_speed__ }}
-								<Span Class = "sub header">{{ __MSG_view_Settings_form_bouyomiConfig_speed__range__bouyomi__ }}</Span>
-							</H5>
+					</Div>
 
-							<Div Class = "ui input">
-								<Input Type = "number" Min = "-1" />
+					<Div ID = "form_nativeBouyomiConfig" Class = "ui segment basic">
+						<H5 Class = "ui header">{{ __MSG_view_Settings_form_nativeBouyomiConfig__ }}</H5>
+
+						<Section Class = "ui form">
+							<H6 Class = "ui sub header">
+								{{ __MSG_view_Settings_form_nativeBouyomiConfig_speed__ }}
+								<Span Class = "sub header">{{ __MSG_view_Settings_form_nativeBouyomiConfig_speed__description__ }}</Span>
+							</H6>
+	
+							<Div Class = "field ui input fluid">
+								<Input ID = "form_nativeBouyomiConfig_speed" Type = "number" Min = "0.1" Max = "10" Step = "0.1" />
 							</Div>
 
 
-							<H5 Class = "ui sub header" data-config-label-id = "type">
-								{{ __MSG_view_Settings_form_bouyomiConfig_type__ }}
-								<Span Class = "sub header">{{ __MSG_view_Settings_form_bouyomiConfig_type__range__bouyomi__ }}</Span>
-							</H5>
+							<H6 Class = "ui sub header">
+								{{ __MSG_view_Settings_form_nativeBouyomiConfig_pitch__ }}
+								<Span Class = "sub header">{{ __MSG_view_Settings_form_nativeBouyomiConfig_pitch__description__ }}</Span>
+							</H6>
+	
+							<Div Class = "field ui input fluid">
+								<Input ID = "form_nativeBouyomiConfig_pitch" Type = "number" Min = "0" Max = "2" Step = "0.1" />
+							</Div>
 
-							<Select ID = "form_bouyomiConfig_type" Class = "ui dropdown fluid">
+
+							<H6 Class = "ui sub header">
+								{{ __MSG_view_Settings_form_nativeBouyomiConfig_volume__ }}
+								<Span Class = "sub header">{{ __MSG_view_Settings_form_nativeBouyomiConfig_volume__description__ }}</Span>
+							</H6>
+	
+							<Div Class = "field ui input fluid">
+								<Input ID = "form_nativeBouyomiConfig_volume" Type = "number" Min = "0" Max = "1" Step = "0.1" />
+							</Div>
+	
+	
+							<H6 Class = "ui sub header">
+								{{ __MSG_view_Settings_form_nativeBouyomiConfig_type__ }}
+								<Span Class = "sub header">{{ __MSG_view_Settings_form_nativeBouyomiConfig_type__description__ }}</Span>
+							</H6>
+	
+							<Select ID = "form_nativeBouyomiConfig_type" Class = "field ui dropdown fluid">
 								<!-- <Option Value = "${voice.name}">${voice.name}</Option> -->
 							</Select>
-						</Div>
+						</Section>
 					</Div>
+				</Section>
+
+
+				<Div Class = "ui divider horizontal">
+					<I Class = "icon setting"></I>
 				</Div>
 
 
@@ -83,14 +117,14 @@
 					<Span Class = "sub header">{{ __MSG_view_Settings_form_services__description__ }}</Span>
 				</H4>
 
-				<Div ID = "form_services" Class = "fields grouped">
+				<Section ID = "form_services" Class = "fields grouped">
 					<!--
 						<Div Class = "field ui checkbox toggle" Data-Storage-Key = "${STORAGE_KEYS.SERVICES}" Data-Service = "${service}">
 							<Label>{{ __MSG_services_${service}__ }}</Label>
 							<Input Type = "checkbox" />
 						</Div>
 					-->
-				</Div>
+				</Section>
 			</Section>
 		</Main>
 	</Body>
