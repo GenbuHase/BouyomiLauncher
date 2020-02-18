@@ -24,7 +24,7 @@ const SELECTORS = {
 };
 
 const animateByBouyomiType = bouyomiType => {
-	$(SELECTORS.Form_BouyomiConfig_Indicator).transition(bouyomiType === Bouyomi.ClientType.Bouyomi ? "show" : "hide", { displayType: "flex" });
+	document.querySelector(SELECTORS.Form_BouyomiConfig).classList[bouyomiType === Bouyomi.ClientType.Bouyomi ? "add" : "remove"]("info");
 	$(SELECTORS.Form_NativeBouyomiConfig).transition(bouyomiType === Bouyomi.ClientType.Bouyomi ? "hide" : "show");
 };
 
@@ -63,7 +63,10 @@ I18n.autoApply()
 				this.addEventListener("change", async () => {
 					const config = Object.assign({}, bouyomi._nativeClient.defaultConfig, await storage.get(NATIVE_BOUYOMI_CONFIG));
 
-					if (!this.reportValidity()) return;
+					const isValid = this.reportValidity();
+					$(this).parent(".ui.field")[!isValid ? "addClass" : "removeClass"]("error");
+
+					if (!isValid) return;
 					storage.set(NATIVE_BOUYOMI_CONFIG,
 						Object.assign(config, {
 							[this.dataset.configKey]: this.value
@@ -143,4 +146,6 @@ I18n.autoApply()
 		$(".ui.dropdown").dropdown({ preserveHTML: false });
 		$(".ui.checkbox").checkbox();
 		$(".ui.accordion").accordion();
+
+		$(SELECTORS.Form).removeClass("loading");
 	});
