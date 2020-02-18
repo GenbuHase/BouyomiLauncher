@@ -3,7 +3,7 @@
 
 	"name": "__MSG_app_name__",
 	"description": "__MSG_app_description__",
-	"version": "1.2.9",
+	"version": "1.2.10",
 
 	"default_locale": "en",
 	"homepage_url": "https://github.com/GenbuHase/BouyomiLauncher",

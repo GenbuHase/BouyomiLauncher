@@ -40,11 +40,15 @@ I18n.autoApply()
 			.each(function () {
 				this.dataset.storageKey = BOUYOMI_TYPE;
 				
-				this.addEventListener("change", () => {
+				this.addEventListener("change", async () => {
+					const field = $(this).parent(".ui.field");
+					field.addClass("loading");
+
 					const bouyomiType = this.value;
-					storage.set(this.dataset.storageKey, bouyomiType);
+					await storage.set(this.dataset.storageKey, bouyomiType);
 
 					animateByBouyomiType(bouyomiType);
+					field.removeClass("loading");
 				});
 			})
 			.dropdown("set selected", stored);
@@ -61,17 +65,22 @@ I18n.autoApply()
 			.find(SELECTORS.Form_NativeBouyomiConfig_Input)
 			.each(function () {
 				this.addEventListener("change", async () => {
+					const field = $(this).parent(".ui.field");
+					field.addClass("loading");
+
 					const config = Object.assign({}, bouyomi._nativeClient.defaultConfig, await storage.get(NATIVE_BOUYOMI_CONFIG));
 
 					const isValid = this.reportValidity();
 					$(this).parent(".ui.field")[!isValid ? "addClass" : "removeClass"]("error");
 
 					if (!isValid) return;
-					storage.set(NATIVE_BOUYOMI_CONFIG,
+					await storage.set(NATIVE_BOUYOMI_CONFIG,
 						Object.assign(config, {
 							[this.dataset.configKey]: this.value
 						})
 					);
+
+					field.removeClass("loading");
 				});
 			});
 
@@ -122,9 +131,7 @@ I18n.autoApply()
 				elem.dataset.storageKey = STORAGE_KEYS.SERVICES,
 				elem.dataset.serviceKey = service;
 
-				elem.addEventListener("change", () => {
-					storage.set(key, fieldElem_input.checked);
-				});
+				elem.addEventListener("change", () => storage.set(key, fieldElem_input.checked));
 
 				return elem;
 			})();
