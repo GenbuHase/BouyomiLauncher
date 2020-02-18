@@ -1,6 +1,6 @@
 /* global STORAGE_KEYS */
 /* global storage */
-/* global Bouyomi */
+/* global bouyomi */
 
 
 
@@ -41,7 +41,7 @@ chrome.runtime.onMessage.addListener(({ serviceId }, sender, resolve) => {
 					const message = YouTube.sanitizeChatMessage(chat.querySelector(YouTube.SELECTORS.Chat_Message_Message));
 
 					storage.get(STORAGE_KEYS.getServiceKey(serviceId)).then(value => {
-						if (value) Bouyomi.speak(`${author} さん　　${message}`);
+						if (value) bouyomi.speak(`${author} さん。　${message}`);
 					});
 				}
 			}

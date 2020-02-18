@@ -1,6 +1,6 @@
 /* global SERVICES, STORAGE_KEYS */
 /* global storage */
-/* global Bouyomi */
+/* global Bouyomi, bouyomi */
 
 import I18n from "../libs/I18n.js";
 
@@ -12,12 +12,14 @@ const SELECTORS = {
 	Form_BouyomiConfig: "#form_bouyomiConfig",
 	Form_BouyomiConfig_Indicator: "#form_bouyomiConfig_indicator",
 	Form_NativeBouyomiConfig: "#form_nativeBouyomiConfig",
+	Form_NativeBouyomiConfig_Input: "*[Data-Config-Key]",
+	Form_NativeBouyomiConfig_Input__SimpleParam: ".ui.input *[Data-Config-Key]",
 	Form_NativeBouyomiConfig_Speed: "#form_nativeBouyomiConfig_speed",
 	Form_NativeBouyomiConfig_Pitch: "#form_nativeBouyomiConfig_pitch",
 	Form_NativeBouyomiConfig_Volume: "#form_nativeBouyomiConfig_volume",
 	Form_NativeBouyomiConfig_Type: "#form_nativeBouyomiConfig_type",
 	Form_Services: "#form_services",
-	Form_Services_Service: ".ui.toggle[Data-Service]",
+	Form_Services_Service: ".ui.toggle[Data-Service-Key]",
 	Form_Services_Service_Toggle: "Input[Type='checkbox']"
 };
 
@@ -28,9 +30,11 @@ const animateByBouyomiType = bouyomiType => {
 
 
 I18n.autoApply()
-	.then(async () => {
+	.then(async () => { // About BouyomiType
 		const { BOUYOMI_TYPE } = STORAGE_KEYS;
-		const value = await storage.get(BOUYOMI_TYPE) || "BOUYOMI";
+		const stored =
+			await storage.get(BOUYOMI_TYPE) ||
+			(await storage.set(BOUYOMI_TYPE, Bouyomi.ClientType.Bouyomi))[BOUYOMI_TYPE];
 
 		$(SELECTORS.Form_BouyomiType)
 			.each(function () {
@@ -43,29 +47,67 @@ I18n.autoApply()
 					animateByBouyomiType(bouyomiType);
 				});
 			})
-			.dropdown("set selected", value);
+			.dropdown("set selected", stored);
 
-		animateByBouyomiType(value);
+		animateByBouyomiType(stored);
 	})
-	.then(async () => {
-		await Bouyomi.NativeClient.waitUntilLoaded();
+	.then(async () => { // About NativeBouyomiConfig
+		const { NATIVE_BOUYOMI_CONFIG } = STORAGE_KEYS;
+		const stored =
+			await storage.get(NATIVE_BOUYOMI_CONFIG) ||
+			(await storage.set(NATIVE_BOUYOMI_CONFIG, bouyomi._nativeClient.defaultConfig))[NATIVE_BOUYOMI_CONFIG];
 
-		const VOICES = speechSynthesis.getVoices();
+		$(SELECTORS.Form_NativeBouyomiConfig)
+			.find(SELECTORS.Form_NativeBouyomiConfig_Input)
+			.each(function () {
+				this.addEventListener("change", async () => {
+					const config = Object.assign({}, bouyomi._nativeClient.defaultConfig, await storage.get(NATIVE_BOUYOMI_CONFIG));
 
-		for (const voice of VOICES) {
-			document.querySelector(SELECTORS.Form_NativeBouyomiConfig_Type).appendChild(
+					if (!this.reportValidity()) return;
+					storage.set(NATIVE_BOUYOMI_CONFIG,
+						Object.assign(config, {
+							[this.dataset.configKey]: this.value
+						})
+					);
+				});
+			});
+
+		$(SELECTORS.Form_NativeBouyomiConfig)
+			.find(SELECTORS.Form_NativeBouyomiConfig_Input__SimpleParam)
+			.each(function () {
+				const { configKey } = this.dataset;
+				this.value = stored[configKey] || bouyomi._nativeClient.defaultConfig[configKey];
+			});
+		
+
+		await bouyomi._nativeClient.on("load");
+
+		const dropdown = document.querySelector(SELECTORS.Form_NativeBouyomiConfig_Type);
+		for (const voice of Bouyomi.NativeClient.Voices) {
+			dropdown.appendChild(
 				new Option(voice.name, voice.name)
 			);
 		}
+
+		$(SELECTORS.Form_NativeBouyomiConfig_Type)
+			.each(function () {
+				const { configKey } = this.dataset;
+				const voiceName = stored[configKey];
+
+				if (!Bouyomi.NativeClient.getVoiceByName(voiceName)) {
+					const newVoiceName = stored[configKey] = Bouyomi.NativeClient.Voices[0].name;
+
+					this.value = newVoiceName,
+					storage.set(NATIVE_BOUYOMI_CONFIG, stored);
+
+					return;
+				}
+
+				this.value = voiceName;
+			});
 	})
-	.then(async () => {
-		/*
-		 * <Div Class = "field ui checkbox toggle" Data-Storage-Key = "${STORAGE_KEYS.SERVICES}" Data-Service = "${service}">
-		 *     <Label>{{ __MSG_services_${service}__ }}</Label>
-		 *     <Input Type = "checkbox" />
-		 * </Div>
-		 */
-		const formServices = document.querySelector(`${SELECTORS.Form} ${SELECTORS.Form_Services}`);
+	.then(async () => { // About Services
+		const formServices = document.querySelector(SELECTORS.Form_Services);
 		for (const service of Object.keys(SERVICES)) {
 			const key = STORAGE_KEYS.getServiceKey(service);
 			const value = await storage.get(key) || false;
@@ -75,7 +117,7 @@ I18n.autoApply()
 				const elem = document.createElement("div");
 				elem.classList.add("field", "ui", "checkbox", "toggle"),
 				elem.dataset.storageKey = STORAGE_KEYS.SERVICES,
-				elem.dataset.service = service;
+				elem.dataset.serviceKey = service;
 
 				elem.addEventListener("change", () => {
 					storage.set(key, fieldElem_input.checked);
@@ -97,7 +139,7 @@ I18n.autoApply()
 		}
 	})
 
-	.then(() => {
+	.then(() => { // About Initializing Components
 		$(".ui.dropdown").dropdown({ preserveHTML: false });
 		$(".ui.checkbox").checkbox();
 		$(".ui.accordion").accordion();

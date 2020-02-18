@@ -12,8 +12,8 @@
 		<Script Src = "../libs/Fomantic-UI/dist/semantic.min.js"></Script>
 		
 
-		<Script Type = "module" Src = "../../scripts/libs/Initialize.js"></Script>
 		<Script Src = "../../scripts/libs/variables.js"></Script>
+		<Script Src = "../../scripts/libs/Initialize.js"></Script>
 		<Script Src = "../../scripts/libs/ChromeStorage.js"></Script>
 		<Script Src = "../../scripts/libs/Bouyomi.js"></Script>
 
@@ -70,7 +70,7 @@
 							</H6>
 	
 							<Div Class = "field ui input fluid">
-								<Input ID = "form_nativeBouyomiConfig_speed" Type = "number" Min = "0.1" Max = "10" Step = "0.1" />
+								<Input ID = "form_nativeBouyomiConfig_speed" Data-Config-Key = "speed" Type = "number" Min = "0.1" Max = "10" Step = "0.1" />
 							</Div>
 
 
@@ -80,7 +80,7 @@
 							</H6>
 	
 							<Div Class = "field ui input fluid">
-								<Input ID = "form_nativeBouyomiConfig_pitch" Type = "number" Min = "0" Max = "2" Step = "0.1" />
+								<Input ID = "form_nativeBouyomiConfig_pitch" Data-Config-Key = "pitch" Type = "number" Min = "0" Max = "2" Step = "0.1" />
 							</Div>
 
 
@@ -90,7 +90,7 @@
 							</H6>
 	
 							<Div Class = "field ui input fluid">
-								<Input ID = "form_nativeBouyomiConfig_volume" Type = "number" Min = "0" Max = "1" Step = "0.1" />
+								<Input ID = "form_nativeBouyomiConfig_volume" Data-Config-Key = "volume" Type = "number" Min = "0" Max = "1" Step = "0.1" />
 							</Div>
 	
 	
@@ -99,7 +99,7 @@
 								<Span Class = "sub header">{{ __MSG_view_Settings_form_nativeBouyomiConfig_type__description__ }}</Span>
 							</H6>
 	
-							<Select ID = "form_nativeBouyomiConfig_type" Class = "field ui dropdown fluid">
+							<Select ID = "form_nativeBouyomiConfig_type" Data-Config-Key = "type" Class = "field ui dropdown fluid">
 								<!-- <Option Value = "${voice.name}">${voice.name}</Option> -->
 							</Select>
 						</Section>
@@ -119,7 +119,7 @@
 
 				<Section ID = "form_services" Class = "fields grouped">
 					<!--
-						<Div Class = "field ui checkbox toggle" Data-Storage-Key = "${STORAGE_KEYS.SERVICES}" Data-Service = "${service}">
+						<Div Class = "field ui checkbox toggle" Data-Storage-Key = "${STORAGE_KEYS.SERVICES}" Data-Service-Key = "${service}">
 							<Label>{{ __MSG_services_${service}__ }}</Label>
 							<Input Type = "checkbox" />
 						</Div>

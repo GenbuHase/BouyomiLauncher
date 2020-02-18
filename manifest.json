@@ -32,7 +32,9 @@
 				"scripts/libs/variables.js",
 				"scripts/libs/Initialize.js",
 				"scripts/libs/ChromeStorage.js",
-				"scripts/libs/Bouyomi.js"
+				"scripts/libs/Bouyomi.js",
+
+				"scripts/content/index.js"
 			],
 
 			"matches": [

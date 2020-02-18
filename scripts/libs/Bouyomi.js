@@ -1,8 +1,3 @@
-/* global STORAGE_KEYS */
-/* global storage */
-
-
-
 const Bouyomi = (() => {
 	class Bouyomi {
 		static get ClientType () {
@@ -10,35 +5,46 @@ const Bouyomi = (() => {
 		}
 
 
-		/**
-		 * @param {string} message
-		 * @param {BouyomiConfig | NativeBouyomiConfig} config
-		 */
-		static async speak (message, config) {
-			const client = await this._getClient();
-			client.speak(message, config);
+		get client () {
+			switch (this.clientType) {
+				case Bouyomi.ClientType.Bouyomi:
+					return this._client;
+				case Bouyomi.ClientType.Native:
+					return this._nativeClient;
+				default:
+					throw new TypeError(`A value of "clientType", "${this.clientType}" is not acceptable`);
+			}
 		}
 
 
-		static async _getClient () {
-			switch (await storage.get(STORAGE_KEYS.BOUYOMI_TYPE)) {
-				case this.TYPE.Bouyomi:
-					return this.Client;
-				case this.TYPE.Native:
-					return this.NativeClient;
-			}
+		constructor () {
+			this._client = new Bouyomi.Client();
+			this._nativeClient = new Bouyomi.NativeClient();
+
+			/** @type { Bouyomi.ClientType[keyof Bouyomi.ClientType] } */
+			this.clientType = Bouyomi.ClientType.Bouyomi;
+		}
+
+		/**
+		 * @param {string} message
+		 * @param {BouyomiClient.Config | BouyomiNativeClient.Config} config
+		 */
+		speak (message, config) {
+			this.client.speak(message, config);
 		}
 	}
 
 
 	/**
-	 * @typedef {Object} ClientConfig
+	 * @namespace BouyomiClient
+	 * 
+	 * @typedef {Object} BouyomiClient.Config
 	 * @prop {number} [speed = -1] Between 50 and 200 (Default: -1)
 	 * @prop {number} [pitch = -1] Between 50 and 200 (Default: -1)
 	 * @prop {number} [volume = -1] Between 0 and 100 (Default: -1)
 	 * @prop {number} [type = 0] Check Bouyomi-chan's settings (Default: 0)
 	 * 
-	 * @typedef {0x0001 | 0x0010 | 0x0020 | 0x0030} ClientConfig.Command 0x0001=読み上げ / 0x0010=ポーズ / 0x0020=再開 / 0x0030=スキップ
+	 * @typedef {0x0001 | 0x0010 | 0x0020 | 0x0030} BouyomiClient.Config.CommandType 0x0001=読み上げ / 0x0010=ポーズ / 0x0020=再開 / 0x0030=スキップ
 	 */
 	Bouyomi.Client = class Client {
 		static get DELIMITER () { return "<bouyomi>" }
@@ -65,17 +71,17 @@ const Bouyomi = (() => {
 		}
 
 
-		/** @return {ClientConfig} */
+		/** @return {BouyomiClient.Config} */
 		get defaultConfig () { return { speed: -1, pitch: -1, volume: -1, type: 0 } }
 		
 
-		/** @param {ClientConfig} [config = {}] */
+		/** @param {BouyomiClient.Config} [config = {}] */
 		constructor (config = {}) {
 			this.config = Object.assign({}, this.defaultConfig, config);
 		}
 
 		/**
-		 * @param {Client.CommandType[keyof Client.CommandType]} commandType
+		 * @param {BouyomiClient.Config.CommandType} commandType
 		 * @param {object} [fields = {}]
 		 */
 		async command (commandType, fields = {}) {
@@ -102,38 +108,26 @@ const Bouyomi = (() => {
 
 
 	/**
-	 * @typedef {Object} NativeBouyomiConfig
+	 * @namespace BouyomiNativeClient
+	 * 
+	 * @typedef {Object} BouyomiNativeClient.Config
 	 * @prop {number} [speed = 1] Between 0.1 and 10 (Default: 1)
 	 * @prop {number} [pitch = 1] Between 0 and 2 (Default: 1)
 	 * @prop {number} [volume = 1] Between 0 and 1 (Default: 1)
 	 * @prop {SpeechSynthesisVoice} [type]
+	 * 
+	 * @typedef {"load"} BouyomiNativeClient.EventType
+	 * 
+	 * @callback BouyomiNativeClient.EventCallback
+	 * @param {Bouyomi.NativeClient} client
 	 */
 	Bouyomi.NativeClient = class NativeClient {
-		static get VOICES () { return speechSynthesis.getVoices() }
-		static get isLoaded () { return 0 < this.VOICES.length ? true : false }
+		/** @return {SpeechSynthesisVoice[]} */
+		static get Voices () { return speechSynthesis.getVoices() }
 
+		/** @return {boolean} */
+		static get isLoaded () { return this.Voices.length ? true : false }
 
-		/**
-		 * @param {string} message
-		 * @param {NativeBouyomiConfig} config
-		 */
-		static speak (message, config = {}) {
-			config = Object.assign({
-				speed: 1,
-				pitch: 1,
-				volume: 1,
-				type: this.VOICES.find(voice => voice.name === "Google 日本語")
-			}, config);
-
-
-			const bouyomi = new SpeechSynthesisUtterance(message);
-			bouyomi.rate = config.speed,
-			bouyomi.pitch = config.pitch,
-			bouyomi.volume = config.volume,
-			bouyomi.voice = config.type;
-
-			speechSynthesis.speak(bouyomi);
-		}
 
 		/**
 		 * @param {string} name
@@ -141,50 +135,118 @@ const Bouyomi = (() => {
 		 */
 		static getVoiceByName (name) {
 			if (!this.isLoaded) return null;
-			return this.VOICES.find(voice => voice.name === name);
+			return this.Voices.find(voice => voice.name === name);
+		}
+
+
+		/** @return {BouyomiNativeClient.Config} */
+		get defaultConfig () { return { speed: 1, pitch: 1, volume: 1, type: null } }
+
+		/** @return {BouyomiNativeClient.Config} */
+		get config () { return this._config }
+
+		/** @param {BouyomiNativeClient.Config} value */
+		set config (value) {
+			const { type } = value;
+
+			this._config = Object.assign({}, this.defaultConfig, value, (() => {
+				if (!NativeClient.isLoaded) return {};
+
+				return {
+					type: typeof type === "string" ? (NativeClient.getVoiceByName(type) || NativeClient.Voices[0]) : (type || null)
+				};
+			})());
+		}
+
+
+		/** @param {BouyomiNativeClient.Config} [config = {}] */
+		constructor (config = {}) {
+			this.config = config;
+
+			/** @type {SpeechSynthesisUtterance[]} */
+			this.ques = [];
 		}
 
 		/**
-		 * @param {"load"} eventType
-		 * @param {BouyomiEventCallback} callback
+		 * @param {BouyomiNativeClient.EventType} eventType
+		 * @param {BouyomiNativeClient.EventCallback} callback
+		 * 
+		 * @return {Promise<NativeClient>}
 		 */
-		static on (eventType, callback) {
-			switch (eventType) {
-				case "load":
-					return new Promise((resolve, reject) => {
-						let count = 0;
-						let observer = setInterval(() => {
-							if (10 < (count++)) reject(new Error("Timeout"));
+		on (eventType, callback) {
+			return new Promise((resolve, reject) => {
+				let count = 0;
+				let observer = null;
+
+				switch (eventType) {
+					case "load":
+						return observer = setInterval(() => {
+							if (10 < (count++)) throw reject(new Error("load-event failed with a timeout problem"));
 			
-							if (this.isLoaded) {
+							if (NativeClient.isLoaded) {
 								clearInterval(observer);
 
 								resolve(this);
-								callback(this);
+								callback && callback(this);
 							}
 						}, 500);
-					});
 
-				default:
-					throw new Error(`A value of "eventType", ${eventType}, is not acceptable`);
+					default:
+						throw reject(new Error(`A value of "eventType", "${eventType}" is not acceptable`));
+				}
+			});
+		}
+
+		/** @param {string} message */
+		speak (message) {
+			this.ques.push(this._utter(message, this.config));
+		}
+
+		pause () { speechSynthesis.pause() }
+		resume () { speechSynthesis.resume() }
+
+		skip () {
+			this.pause();
+			this.clear();
+
+			this.ques.splice(0, 1);
+			for (const que of this.ques) {
+				const { text, pitch, volume, voice } = que;
+
+				this._utter(text, {
+					speed: que.rate,
+					pitch,
+					volume,
+					voice
+				});
 			}
 		}
 
-		static waitUntilLoaded () {
-			return new Promise((resolve, reject) => {
-				let count = 0;
-				let observer = setInterval(() => {
-					if (10 < (count++)) reject(new Error("Timeout"));
+		clear () { speechSynthesis.cancel() }
 
-					if (this.isLoaded) {
-						clearInterval(observer);
-						resolve();
-					}
-				}, 500);
-			});
+
+		/**
+		 * @param {string} message
+		 * @param {BouyomiNativeClient.Config} config
+		 * 
+		 * @return {SpeechSynthesisUtterance}
+		 */
+		_utter (message, config) {
+			const utterance = new SpeechSynthesisUtterance(message);
+			utterance.rate = config.speed,
+			utterance.pitch = config.pitch,
+			utterance.volume = config.volume,
+			utterance.voice = config.type;
+
+			speechSynthesis.speak(utterance);
+			return utterance;
 		}
 	};
 
 
 	return Bouyomi;
 })();
+
+
+
+const bouyomi = new Bouyomi();
