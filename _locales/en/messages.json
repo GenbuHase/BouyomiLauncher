@@ -14,35 +14,35 @@
 	"services_002_YouTubeLiveOnBroadcaster": { "message": "YouTube Live On Broadcaster" },
 
 
-	"view_Settings_title": { "message": "Settings" },
+	"view_Config_title": { "message": "Settings" },
 
-	"view_Settings_form_bouyomiType": { "message": "Message Reader" },
-	"view_Settings_form_bouyomiType__description": { "message": "Choose built-in or external tools." },
-	"view_Settings_form_bouyomiType__bouyomi": { "message": "Bouyomi-chan" },
-	"view_Settings_form_bouyomiType__native": { "message": "Built-in API (SpeechSynthesis API)" },
+	"view_Config_form_bouyomiType": { "message": "Message Reader" },
+	"view_Config_form_bouyomiType__description": { "message": "Choose built-in or external tools." },
+	"view_Config_form_bouyomiType__bouyomi": { "message": "Bouyomi-chan" },
+	"view_Config_form_bouyomiType__native": { "message": "Built-in API (SpeechSynthesis API)" },
 
-	"view_Settings_form_bouyomiConfig__indicator": { "message": "On Bouyomi-chan mode, this extension uses a configuration of the tool." },
+	"view_Config_form_bouyomiConfig__indicator": { "message": "On Bouyomi-chan mode, this extension uses a configuration of the tool." },
 	
-	"view_Settings_form_nativeBouyomiConfig": { "message": "Advanced Settings" },
-	"view_Settings_form_nativeBouyomiConfig_speed": { "message": "Speed" },
-	"view_Settings_form_nativeBouyomiConfig_speed__description": { "message": "Between 0.1 and 10 (Default: 1)" },
-	"view_Settings_form_nativeBouyomiConfig_pitch": { "message": "Pitch" },
-	"view_Settings_form_nativeBouyomiConfig_pitch__description": { "message": "Between 0 and 2 (Default: 1)" },
-	"view_Settings_form_nativeBouyomiConfig_volume": { "message": "Volume" },
-	"view_Settings_form_nativeBouyomiConfig_volume__description": { "message": "Between 0 and 1 (Default: 1)" },
-	"view_Settings_form_nativeBouyomiConfig_type": { "message": "Voice Type" },
-	"view_Settings_form_nativeBouyomiConfig_type__description": { "message": "Choose one from a below field." },
+	"view_Config_form_nativeBouyomiConfig": { "message": "Advanced..." },
+	"view_Config_form_nativeBouyomiConfig_speed": { "message": "Speed" },
+	"view_Config_form_nativeBouyomiConfig_speed__description": { "message": "Between 0.1 and 10 (Default: 1)" },
+	"view_Config_form_nativeBouyomiConfig_pitch": { "message": "Pitch" },
+	"view_Config_form_nativeBouyomiConfig_pitch__description": { "message": "Between 0 and 2 (Default: 1)" },
+	"view_Config_form_nativeBouyomiConfig_volume": { "message": "Volume" },
+	"view_Config_form_nativeBouyomiConfig_volume__description": { "message": "Between 0 and 1 (Default: 1)" },
+	"view_Config_form_nativeBouyomiConfig_type": { "message": "Voice Type" },
+	"view_Config_form_nativeBouyomiConfig_type__description": { "message": "Choose one from a below field." },
 
-	"view_Settings_form_services": { "message": "Permitted Services" },
-	"view_Settings_form_services__description": { "message": "Select services to enable features." },
+	"view_Config_form_services": { "message": "Permitted Services" },
+	"view_Config_form_services__description": { "message": "Select services to enable features." },
 	
-	"view_Settings_form_services_toast__enabled": {
+	"view_Config_form_services_toast__enabled": {
 		"message": "$service$ is enabled.",
 		"placeholders": {
 			"service": { "content": "$1" }
 		}
 	},
-	"view_Settings_form_services_toast__disabled": {
+	"view_Config_form_services_toast__disabled": {
 		"message": "$service$ is disabled.",
 		"placeholders": {
 			"service": { "content": "$1" }
