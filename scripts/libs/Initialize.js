@@ -103,10 +103,16 @@
 			 * @param {StorageSetCallback} callback
 			 */
 			const set = function (keyValuePairObj, callback) {
+				let changes = {};
 				for (const entry of Object.entries(keyValuePairObj)) {
+					changes[entry[0]] = {};
+					changes[entry[0]].oldValue = sessionStorage.getItem(entry[0]) ? JSON.parse(sessionStorage.getItem(entry[0])).value : null,
+					changes[entry[0]].newValue = entry[1];
+
 					sessionStorage.setItem(entry[0], JSON.stringify({ value: entry[1] }));
 				}
 
+				if (onChanged._handler) onChanged._handler(changes);
 				callback();
 			};
 
@@ -134,9 +140,21 @@
 			};
 
 
+			/**
+			 * @callback StorageOnChangedCallback
+			 * @param { Object<string, { oldValue: any, newValue: any }> } changes
+			 */
+			const onChanged = {
+				/** @param {StorageOnChangedCallback} callback */
+				addListener (callback) {
+					this._handler = callback;
+				}
+			};
+
+
 
 			chrome.storage = {};
-			chrome.storage.sync = chrome.storage.local = { get, set, remove, clear };
+			chrome.storage.sync = chrome.storage.local = { get, set, remove, clear, onChanged };
 		}
 	})();
 })();

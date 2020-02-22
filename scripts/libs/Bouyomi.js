@@ -1,3 +1,8 @@
+/* global STORAGE_KEYS */
+/* global storage */
+
+
+
 const Bouyomi = (() => {
 	class Bouyomi {
 		static get ClientType () {
@@ -23,6 +28,16 @@ const Bouyomi = (() => {
 
 			/** @type { Bouyomi.ClientType[keyof Bouyomi.ClientType] } */
 			this.clientType = Bouyomi.ClientType.Bouyomi;
+		}
+
+		init () {
+			storage.on("change", store => {
+				const clientTypeChanges = store[STORAGE_KEYS.BOUYOMI_TYPE];
+				const configChanges = store[STORAGE_KEYS.NATIVE_BOUYOMI_CONFIG];
+
+				if (clientTypeChanges) return this.clientType = clientTypeChanges.newValue;
+				if (configChanges) return this._nativeClient.config = configChanges.newValue;
+			});
 		}
 
 		/**
@@ -54,6 +69,9 @@ const Bouyomi = (() => {
 			return { Speak: 0x0001, Pause: 0x0010, Resume: 0x0020, Skip: 0x0030 };
 		}
 
+		/** @return {BouyomiClient.Config} */
+		static get defaultConfig () { return { speed: -1, pitch: -1, volume: -1, type: 0 } }
+
 
 		/**
 		 * @param {object} commandObj
@@ -69,15 +87,11 @@ const Bouyomi = (() => {
 				commandObj.message
 			].join(this.DELIMITER);
 		}
-
-
-		/** @return {BouyomiClient.Config} */
-		get defaultConfig () { return { speed: -1, pitch: -1, volume: -1, type: 0 } }
 		
 
 		/** @param {BouyomiClient.Config} [config = {}] */
 		constructor (config = {}) {
-			this.config = Object.assign({}, this.defaultConfig, config);
+			this.config = Object.assign({}, Client.defaultConfig, config);
 		}
 
 		/**
@@ -125,6 +139,9 @@ const Bouyomi = (() => {
 		/** @return {SpeechSynthesisVoice[]} */
 		static get Voices () { return speechSynthesis.getVoices() }
 
+		/** @return {BouyomiNativeClient.Config} */
+		static get defaultConfig () { return { speed: 1, pitch: 1, volume: 1, type: null } }
+
 		/** @return {boolean} */
 		static get isLoaded () { return this.Voices.length ? true : false }
 
@@ -140,16 +157,13 @@ const Bouyomi = (() => {
 
 
 		/** @return {BouyomiNativeClient.Config} */
-		get defaultConfig () { return { speed: 1, pitch: 1, volume: 1, type: null } }
-
-		/** @return {BouyomiNativeClient.Config} */
 		get config () { return this._config }
 
 		/** @param {BouyomiNativeClient.Config} value */
 		set config (value) {
 			const { type } = value;
 
-			this._config = Object.assign({}, this.defaultConfig, value, (() => {
+			this._config = Object.assign({}, NativeClient.defaultConfig, value, (() => {
 				if (!NativeClient.isLoaded) return {};
 
 				return {

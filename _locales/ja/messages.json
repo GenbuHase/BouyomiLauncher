@@ -8,6 +8,7 @@
 	"common_grant": { "message": "許可" }, "common_deny": { "message": "拒否" },
 	"common_yes": { "message": "はい" }, "common_no": { "message": "いいえ" },
 	"common_on": { "message": "オン" }, "common_off": { "message": "オフ" },
+	"common_play": { "message": "再生" }, "common_stop": { "message": "停止" },
 
 
 	"services_001_YouTubeLiveOnViewer": { "message": "YouTube Live (閲覧側)" },
@@ -32,6 +33,9 @@
 	"view_Config_form_nativeBouyomiConfig_volume__description": { "message": "0から1までの任意の値 (初期値: 1)" },
 	"view_Config_form_nativeBouyomiConfig_type": { "message": "声質" },
 	"view_Config_form_nativeBouyomiConfig_type__description": { "message": "以下から一つ選択してください。" },
+
+	"view_Config_form_bouyomiTester": { "message": "読み上げテスト" },
+	"view_Config_form_bouyomiTester__description": { "message": "現在の設定で読み上げテストを行います。" },
 
 	"view_Config_form_services": { "message": "利用するサービス" },
 	"view_Config_form_services__description": { "message": "自動読み上げを有効にするサービスを選択してください。" },

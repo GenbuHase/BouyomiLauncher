@@ -10,7 +10,7 @@
 
 		<Script Src = "../libs/jquery-3.4.1.min.js"></Script>
 		<Script Src = "../libs/Fomantic-UI/dist/semantic.min.js"></Script>
-		
+
 
 		<Script Src = "../../scripts/libs/variables.js"></Script>
 		<Script Src = "../../scripts/libs/Initialize.js"></Script>
@@ -106,6 +106,29 @@
 								<!-- <Option Value = "${voice.name}">${voice.name}</Option> -->
 							</Select>
 						</Section>
+					</Div>
+
+					<Div ID = "form_bouyomiTester" Class = "ui segment basic">
+						<H5 Class = "ui header">
+							{{ __MSG_view_Config_form_bouyomiTester__ }}
+							<Span Class = "sub header">{{ __MSG_view_Config_form_bouyomiTester__description__ }}</Span>
+						</H5>
+
+						<Div Class = "field ui input fluid">
+							<Textarea ID = "form_bouyomiTester_content"></Textarea>
+						</Div>
+
+						<Div Class = "field grouped fields">
+							<Button ID = "form_bouyomiTester_playButton" Class = "ui button basic positive">
+								<I Class = "icon play"></I>
+								{{ __MSG_common_play__ }}
+							</Button>
+
+							<Button Class = "ui button basic negative">
+								<I ID = "form_bouyomiTester_stopButton" Class = "icon stop"></I>
+								{{ __MSG_common_stop__ }}
+							</Button>
+						</Div>
 					</Div>
 				</Section>
 

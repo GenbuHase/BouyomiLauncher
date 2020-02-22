@@ -8,6 +8,7 @@
 	"common_grant": { "message": "Grant" }, "common_deny": { "message": "Deny" },
 	"common_yes": { "message": "Yes" }, "common_no": { "message": "No" },
 	"common_on": { "message": "On" }, "common_off": { "message": "Off" },
+	"common_play": { "message": "Play" }, "common_stop": { "message": "Stop" },
 
 
 	"services_001_YouTubeLiveOnViewer": { "message": "YouTube Live On Viewer" },
@@ -32,6 +33,9 @@
 	"view_Config_form_nativeBouyomiConfig_volume__description": { "message": "Between 0 and 1 (Default: 1)" },
 	"view_Config_form_nativeBouyomiConfig_type": { "message": "Voice Type" },
 	"view_Config_form_nativeBouyomiConfig_type__description": { "message": "Choose one from a below field." },
+
+	"view_Config_form_bouyomiTester": { "message": "Reading Test" },
+	"view_Config_form_bouyomiTester__description": { "message": "You can preview with a current configuration." },
 
 	"view_Config_form_services": { "message": "Permitted Services" },
 	"view_Config_form_services__description": { "message": "Select services to enable features." },

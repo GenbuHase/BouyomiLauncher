@@ -18,6 +18,10 @@ const SELECTORS = {
 	Form_NativeBouyomiConfig_Pitch: "#form_nativeBouyomiConfig_pitch",
 	Form_NativeBouyomiConfig_Volume: "#form_nativeBouyomiConfig_volume",
 	Form_NativeBouyomiConfig_Type: "#form_nativeBouyomiConfig_type",
+	Form_BouyomiTester: "#form_bouyomiTester",
+	Form_BouyomiTester_Content: "#form_bouyomiTester_content",
+	Form_BouyomiTester_PlayButton: "#form_bouyomiTester_playButton",
+	Form_BouyomiTester_StopButton: "#form_bouyomiTester_stopButton",
 	Form_Services: "#form_services",
 	Form_Services_Service: ".ui.toggle[Data-Service-Key]",
 	Form_Services_Service_Toggle: "Input[Type='checkbox']"
@@ -32,7 +36,7 @@ const animateByBouyomiType = bouyomiType => {
 I18n.autoApply()
 	.then(async () => { // About BouyomiType
 		const { BOUYOMI_TYPE } = STORAGE_KEYS;
-		const stored =
+		const stored = bouyomi.clientType =
 			await storage.get(BOUYOMI_TYPE) ||
 			(await storage.set(BOUYOMI_TYPE, Bouyomi.ClientType.Bouyomi))[BOUYOMI_TYPE];
 
@@ -57,9 +61,9 @@ I18n.autoApply()
 	})
 	.then(async () => { // About NativeBouyomiConfig
 		const { NATIVE_BOUYOMI_CONFIG } = STORAGE_KEYS;
-		const stored =
+		const stored = bouyomi._nativeClient.config =
 			await storage.get(NATIVE_BOUYOMI_CONFIG) ||
-			(await storage.set(NATIVE_BOUYOMI_CONFIG, bouyomi._nativeClient.defaultConfig))[NATIVE_BOUYOMI_CONFIG];
+			(await storage.set(NATIVE_BOUYOMI_CONFIG, Bouyomi.NativeClient.defaultConfig))[NATIVE_BOUYOMI_CONFIG];
 
 		$(SELECTORS.Form_NativeBouyomiConfig)
 			.find(SELECTORS.Form_NativeBouyomiConfig_Input)
@@ -88,7 +92,7 @@ I18n.autoApply()
 			.find(SELECTORS.Form_NativeBouyomiConfig_Input__SimpleParam)
 			.each(function () {
 				const { configKey } = this.dataset;
-				this.value = stored[configKey] || bouyomi._nativeClient.defaultConfig[configKey];
+				this.value = stored[configKey] || Bouyomi.NativeClient.defaultConfig[configKey];
 			});
 		
 
@@ -149,6 +153,13 @@ I18n.autoApply()
 		}
 	})
 
+	.then(() => { // About Initializing BouyomiTester
+		bouyomi.init();
+		
+		document.querySelector(SELECTORS.Form_BouyomiTester_PlayButton).addEventListener("click", () => {
+			bouyomi.speak(document.querySelector(SELECTORS.Form_BouyomiTester_Content).value);
+		});
+	})
 	.then(() => { // About Initializing Components
 		$(".ui.dropdown").dropdown({ preserveHTML: false });
 		$(".ui.checkbox").checkbox();
