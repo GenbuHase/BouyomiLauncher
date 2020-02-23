@@ -159,6 +159,10 @@ I18n.autoApply()
 		document.querySelector(SELECTORS.Form_BouyomiTester_PlayButton).addEventListener("click", () => {
 			bouyomi.speak(document.querySelector(SELECTORS.Form_BouyomiTester_Content).value);
 		});
+
+		document.querySelector(SELECTORS.Form_BouyomiTester_StopButton).addEventListener("click", () => {
+			
+		});
 	})
 	.then(() => { // About Initializing Components
 		$(".ui.dropdown").dropdown({ preserveHTML: false });

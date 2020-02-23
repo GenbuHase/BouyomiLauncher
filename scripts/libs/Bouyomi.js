@@ -211,49 +211,61 @@ const Bouyomi = (() => {
 			});
 		}
 
-		/** @param {string} message */
-		speak (message) {
-			this.ques.push(this._utter(message, this.config));
+		/**
+		 * @param {string} message
+		 * @param {BouyomiNativeClient.Config} [config]
+		 */
+		speak (message, config = this.config) {
+			const segments = message.match(/[「『（]?[^。」』）\s]*[。」』）\s]+/g) || [ message ]; // 上限文字数の回避処理
+
+			for (let i = 0; i < segments.length; i++) {
+				const utterance = (() => {
+					const utterance = new SpeechSynthesisUtterance(segments[i]);
+					utterance.rate = config.speed,
+					utterance.pitch = config.pitch,
+					utterance.volume = config.volume,
+					utterance.voice = config.type;
+
+					utterance.addEventListener("end", e => {
+						const queIndex = this.ques.findIndex(que => que === e.utterance);
+						queIndex < 0 || this.ques.splice(queIndex, 1);
+					});
+
+					return utterance;
+				})();
+
+				speechSynthesis.speak(utterance);
+				this.ques.push(utterance);
+			}
 		}
 
 		pause () { speechSynthesis.pause() }
 		resume () { speechSynthesis.resume() }
 
 		skip () {
-			this.pause();
-			this.clear();
+			/** @type {SpeechSynthesisUtterance[]} */
+			const currentQues = Object.assign([], this.ques);
+			currentQues.shift();
 
-			this.ques.splice(0, 1);
-			for (const que of this.ques) {
-				const { text, pitch, volume, voice } = que;
+			this.pause(), this.clear();
 
-				this._utter(text, {
+			for (const que of currentQues) {
+				const { text, pitch, volume } = que;
+
+				this.speak(text, {
 					speed: que.rate,
 					pitch,
 					volume,
-					voice
+					type: que.voice
 				});
 			}
+
+			this.resume();
 		}
 
-		clear () { speechSynthesis.cancel() }
-
-
-		/**
-		 * @param {string} message
-		 * @param {BouyomiNativeClient.Config} config
-		 * 
-		 * @return {SpeechSynthesisUtterance}
-		 */
-		_utter (message, config) {
-			const utterance = new SpeechSynthesisUtterance(message);
-			utterance.rate = config.speed,
-			utterance.pitch = config.pitch,
-			utterance.volume = config.volume,
-			utterance.voice = config.type;
-
-			speechSynthesis.speak(utterance);
-			return utterance;
+		clear () {
+			speechSynthesis.cancel();
+			this.ques.splice(0, this.ques.length);
 		}
 	};
 
