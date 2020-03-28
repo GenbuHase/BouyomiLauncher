@@ -44,9 +44,10 @@ const Bouyomi = (() => {
 		 * @param {string} message
 		 * @param {BouyomiClient.Config | BouyomiNativeClient.Config} config
 		 */
-		speak (message, config) {
-			this.client.speak(message, config);
-		}
+		speak (message, config) { this.client.speak(message, config) }
+		pause () { this.client.pause() }
+		resume () { this.client.resume() }
+		skip () { this.client.skip() }
 	}
 
 
