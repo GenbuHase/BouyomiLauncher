@@ -13,6 +13,7 @@
 
 	"services_001_YouTubeLiveOnViewer": { "message": "YouTube Live (閲覧側)" },
 	"services_002_YouTubeLiveOnBroadcaster": { "message": "YouTube Live (配信側)" },
+	"services_003_TwitCasting": { "message": "TwitCasting (ツイキャス)" },
 
 
 	"view_Config_title": { "message": "設定" },

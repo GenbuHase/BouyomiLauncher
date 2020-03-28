@@ -3,7 +3,7 @@
 
 	"name": "__MSG_app_name__",
 	"description": "__MSG_app_description__",
-	"version": "1.3.4",
+	"version": "1.3.5",
 
 	"default_locale": "en",
 	"homepage_url": "https://github.com/GenbuHase/BouyomiLauncher",
@@ -14,7 +14,8 @@
 		"storage",
 
 		"*://www.youtube.com/live_chat*",
-		"*://studio.youtube.com/channel/*/livestreaming/dashboard?*"
+		"*://studio.youtube.com/channel/*/livestreaming/dashboard?*",
+		"*://twitcasting.tv/*/broadcastertool*"
 	],
 
 	"background": {
@@ -39,7 +40,8 @@
 
 			"matches": [
 				"*://www.youtube.com/live_chat*",
-				"*://studio.youtube.com/channel/*/livestreaming/dashboard?*"
+				"*://studio.youtube.com/channel/*/livestreaming/dashboard?*",
+				"*://twitcasting.tv/*/broadcastertool*"
 			],
 
 			"all_frames": true,
@@ -51,6 +53,16 @@
 			"matches": [
 				"*://www.youtube.com/live_chat*",
 				"*://studio.youtube.com/channel/*/livestreaming/dashboard?*"
+			],
+
+			"all_frames": true,
+			"run_at": "document_idle"
+		},
+
+		{
+			"js": ["scripts/content/services/TwitCasting.js"],
+			"matches": [
+				"*://twitcasting.tv/*/broadcastertool*"
 			],
 
 			"all_frames": true,

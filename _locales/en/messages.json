@@ -13,6 +13,7 @@
 
 	"services_001_YouTubeLiveOnViewer": { "message": "YouTube Live On Viewer" },
 	"services_002_YouTubeLiveOnBroadcaster": { "message": "YouTube Live On Broadcaster" },
+	"services_003_TwitCasting": { "message": "TwitCasting" },
 
 
 	"view_Config_title": { "message": "Settings" },
