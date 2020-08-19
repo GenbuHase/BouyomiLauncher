@@ -217,7 +217,7 @@ const Bouyomi = (() => {
 		 * @param {BouyomiNativeClient.Config} [config]
 		 */
 		speak (message, config = this.config) {
-			const segments = message.match(/[「『（]?[^。」』）\s]*[。」』）\s]+/g) || [ message ]; // 上限文字数の回避処理
+			const segments = message.match(/[「『（]?[^。．.,！!？?」』）\r\n]*(?:[。．.,！!？?」』）\r\n]+|.$)/g) || [ message ]; // 上限文字数の回避処理
 
 			for (let i = 0; i < segments.length; i++) {
 				const utterance = (() => {
