@@ -1,7 +1,8 @@
 /**
  * @typedef {Object} Service
  * @prop {string} id
- * @prop {RegExp} expression
+ * @prop {RegExp} [expression]
+ * @prop {RegExp[]} [expressions]
  */
 
 /** @type {Object<string, Service>} */
@@ -11,11 +12,14 @@ const SERVICES = {
 	},
 
 	"002_YouTubeLiveOnBroadcaster": {
-		expression: /https?:\/\/studio\.youtube\.com\/channel\/([^/]+)\/livestreaming\/dashboard(\?.*)?/
+		expressions: [
+			/https?:\/\/studio\.youtube\.com\/channel\/([^/]+)\/livestreaming.*/,
+			/https?:\/\/studio\.youtube\.com\/video\/([^/]+)\/livestreaming/
+		]
 	},
 
 	"003_TwitCasting": {
-		expression: /https?:\/\/twitcasting\.tv\/([^/]+)\/broadcaster.+/
+		expression: /https?:\/\/twitcasting\.tv\/([^/]+)\/broadcaster.*/
 	}
 };
 
