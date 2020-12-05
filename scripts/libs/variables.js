@@ -13,6 +13,7 @@ const SERVICES = {
 
 	"002_YouTubeLiveOnBroadcaster": {
 		expressions: [
+			/https?:\/\/studio\.youtube.com\/live_chat(\?.*)/,
 			/https?:\/\/studio\.youtube\.com\/channel\/([^/]+)\/livestreaming.*/,
 			/https?:\/\/studio\.youtube\.com\/video\/([^/]+)\/livestreaming/
 		]
